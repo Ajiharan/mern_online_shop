@@ -60,7 +60,29 @@ router.get('/login',async(req,res)=>{
     }).catch(err=>{
         res.status(400).json(err);
     })
-})
+});
+
+router.get('/getUser',(req,res,next)=>{
+    var token=req.header('auth');
+    req.token=token;
+    next();
+
+},(req,res)=>{
+
+    jwt.verify(req.token,'react',(err,data)=>{
+        if(err){
+            console.log(err);
+            res.sendStatus(403);//forbidden
+        }else{
+            UserSchema.findOne({email:jwt.decode(req.token).email}).select(['-password']).then(resdata=>{
+                res.status(200).json(resdata);
+            }).catch(err=>{
+                res.status(400).json(err);
+            })
+        }
+            
+    });
+});
 
 
 
