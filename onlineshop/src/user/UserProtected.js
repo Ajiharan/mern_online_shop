@@ -4,6 +4,7 @@ const UserProtected = ({component,...rest}) => {
     let RenderComponent=component;
     console.log(Component);
     let userhasToken=JSON.parse(localStorage.getItem('auth'));
+    console.log("userToken",userhasToken);
     return (
       <Route
         {...rest}
@@ -12,7 +13,7 @@ const UserProtected = ({component,...rest}) => {
                 console.log("Component",props);
                 return userhasToken !==null ?(<RenderComponent {...props}/>):(  <Redirect
                     to={{
-                        pathname:'/Login'
+                        pathname:'/user/Login'
                     }}
                     />)
 

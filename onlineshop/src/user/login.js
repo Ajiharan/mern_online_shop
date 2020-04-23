@@ -55,7 +55,7 @@ const Login = (props) => {
                     position: toast.POSITION.TOP_RIGHT
                   });
                   localStorage.setItem('auth',JSON.stringify(res.data));
-                  props.history.push('/Home');
+                  props.history.push('/');
               }).catch(err=>{
                 toast.error(err.response.data, {
                     position: toast.POSITION.TOP_RIGHT
