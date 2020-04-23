@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import {Route,Redirect} from 'react-router-dom';
 
 const Register = (props) => {
-
+    let hasToken=JSON.parse(localStorage.getItem('auth'));
     useEffect(()=>{
        let tname= document.querySelector("#name");
        let temail= document.querySelector("#email");
@@ -87,6 +87,15 @@ const Register = (props) => {
     });
     return (
         <div className="container">
+                  {
+                hasToken===null?(null):(
+                    <Redirect
+                    to={{
+                        pathname:'/'
+                    }}
+                    />
+                )
+            }
             <div className="row" id="container-image">
                 <div>
                      <img src={require('../images/logo.png')} alt="Smiley face" height="150px;" width="150px;" />

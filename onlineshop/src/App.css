@@ -100,3 +100,55 @@ label{
   font-size: small;
 }
 
+#navbarNavDropdown{
+  display:flex;
+  justify-content:space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#div1{
+  display:flex;
+  justify-content:space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#div1 div{
+  margin-left: 8px;
+}
+
+.protect{
+
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+}
+
+.protect #profile{
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.protect button{ 
+  width:70px;
+}
+
+.nav-logo{
+  display: flex;
+  justify-content: center;
+ 
+}
+
+#top-nav{
+  display: flex;
+  justify-content:center;
+  
+}
+
+.navbar-nav .dropdown-menu{
+  position: absolute;
+}
+
+
+
+
