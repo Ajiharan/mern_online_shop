@@ -87,6 +87,12 @@ const Register = (props) => {
     });
     return (
         <div className="container">
+            <div className="row" id="container-image">
+                <div>
+                     <img src={require('../images/logo.png')} alt="Smiley face" height="150px;" width="150px;" />
+                </div>
+               
+            </div>
             <div className="container-main-row row">        
                 <div className="register-main-container">
                     <h2 className="text-center">Create Account</h2>
@@ -125,7 +131,7 @@ const Register = (props) => {
                                 </div>                    
                             </div>
                             <div className="container-privacy">
-                            <p className="container-condition"> By creating an account, you agree to Darzk's 
+                            <p className="container-condition"> By creating an account, you agree to Darkz's 
                                 <a href="#"> condition of use</a> and  <a href="#"> privacy Policy</a></p>
                             </div>
                             <div className="container-login">

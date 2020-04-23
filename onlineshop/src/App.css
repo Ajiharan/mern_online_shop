@@ -1,7 +1,7 @@
 .register-main-container{
   height:680px;
   border:1px solid rgb(139, 130, 130);
-  margin-top: 100px;
+  margin-top: 30px;
   margin-left: 15px;
   margin-bottom: 8px;
   margin-right: 15px;
@@ -9,10 +9,19 @@
   width:400px;
 }
 
+.container-main-row h6 {
+  font-style: italic;
+}
+
+#container-image{
+  display: flex;
+  justify-content: center;
+}
+
 .login-main-container{
   height:450px;
   border:1px solid rgb(139, 130, 130);
-  margin-top: 100px;
+  margin-top: 30px;
   margin-left: 15px;
   margin-bottom: 8px;
   margin-right: 15px;

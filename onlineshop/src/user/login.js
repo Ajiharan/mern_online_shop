@@ -65,6 +65,12 @@ const Login = (props) => {
      });
      return (
          <div className="container">
+              <div className="row" id="container-image">
+                <div>
+                     <img src={require('../images/logo.png')} alt="Smiley face" height="150px;" width="150px;" />
+                </div>
+               
+            </div>
              <div className="container-main-row row">        
                  <div className="login-main-container">
                      <h2 className="text-center">Sign-in Account</h2>
@@ -91,7 +97,7 @@ const Login = (props) => {
                                  </div>                    
                              </div>
                              <div className="container-privacy">
-                             <p className="container-condition"> By contuning you agree to Darzk's 
+                             <p className="container-condition"> By contuning you agree to Darkz's 
                                  <a href="#"> condition of use</a> and  <a href="#"> privacy Policy</a></p>
                              </div>
                              <div className="container-login">
