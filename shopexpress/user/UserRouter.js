@@ -41,7 +41,7 @@ router.post('/register',async (req,res)=>{
 
 });
 
-router.get('/login',async(req,res)=>{
+router.post('/login',async(req,res)=>{
 
     UserSchema.findOne({email:req.body.email}).then(async data=>{
         if(data){
