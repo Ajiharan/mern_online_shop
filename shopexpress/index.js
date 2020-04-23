@@ -4,6 +4,7 @@ const mongoose=require('mongoose');
 const morgan=require('morgan');
 const cors=require('cors');
 const userRouter=require('./user/UserRouter');
+const adminRouter=require('./admin/AdminRouter');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
 require('dotenv/config');
@@ -17,6 +18,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/user',userRouter);
+app.use('/admin',adminRouter);
 
 app.listen(3000,(err)=>{
     if(err)

@@ -1,5 +1,6 @@
 const router=require('express').Router();
 const UserSchema=require('./UserSchema');
+const AdminSchema=require('../admin/AdminSchema');
 const bcryptjs=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
@@ -15,7 +16,8 @@ router.get('/register',(req,res)=>{
 
 router.post('/register',async (req,res)=>{
     UserSchema.findOne({email:req.body.email}).then(async data=>{
-        if(data){
+       let admin_data=await AdminSchema.findOne({email:req.body.email});
+        if(data || admin_data){
             return   res.status(400).json("Email Already Exists");
         }
        
