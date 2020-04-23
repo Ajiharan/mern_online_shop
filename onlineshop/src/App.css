@@ -66,6 +66,7 @@
   justify-content: center;
 }
 
+
 #button-group{
   display: flex;
   justify-content: center;
@@ -81,7 +82,13 @@ label{
  
 }
 
+#error-404{
+  font-size:85px;
+}
 
+#error-404-text{
+  font-size:35px;
+}
 
 .error{
   border:1px solid red;
@@ -92,3 +99,4 @@ label{
   color: rgba(46, 48, 48, 0.452);
   font-size: small;
 }
+
