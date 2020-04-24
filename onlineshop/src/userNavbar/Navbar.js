@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -38,7 +37,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <div className="navbar-nav" id="div1">
                 <div className="nav-item active">
-                    <Link to="/" className="nav-link">Home <span class="sr-only">(current)</span></Link>
+                    <Link to="/" className="nav-link">Home <span className="sr-only">(current)</span></Link>
                 </div>
                 <div className="nav-item">
                     <Link className="nav-link" to="/user/Register">Register</Link>
@@ -50,7 +49,7 @@ const Navbar = () => {
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <Link className="dropdown-item" to="/user/Login">User-login</Link>
-                        <Link className="dropdown-item" to="/user/Login">Admin-login</Link>
+                        <Link className="dropdown-item" to="/admin/Login">Admin-login</Link>
                 
                     </div>
                 </div>
@@ -65,7 +64,7 @@ const Navbar = () => {
         <div className="navbar navbar-expand-lg navbar-dark bg-dark" id="top-nav">
             <div className="nav-logo">
                 <div>
-                 <Link className="navbar-brand" href="#"><img src={require('../images/logo_transparent.png')} alt="Smiley face" height="60px;" width="60px;" /></Link>
+                 <a className="navbar-brand" href="#"><img src={require('../images/logo_transparent.png')} alt="Smiley face" height="60px;" width="60px;" /></a>
                 </div>
             </div>
            {publicViews}
