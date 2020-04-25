@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import {Route,Redirect} from 'react-router-dom';
 
 const Login = (props) => {
-    let hasToken=JSON.parse(localStorage.getItem('auth'));
+    let hasToken=JSON.parse(localStorage.getItem('auth_admin'));
     useEffect(()=>{
        
         let temail= document.querySelector("#email");
