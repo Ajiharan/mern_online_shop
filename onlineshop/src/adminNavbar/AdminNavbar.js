@@ -6,6 +6,7 @@ import {
     Link,
     useHistory
   } from "react-router-dom";
+
 const AdminNavbar = () => {
     const history = useHistory();
     useEffect(()=>{
@@ -32,14 +33,20 @@ const AdminNavbar = () => {
                     <div className="navbar-nav" id="admin-div">
                         <div>
                             <li className="nav-item active">
-                                <Link className="nav-link" to="/admin/home" href="#">Home <span className="sr-only">(current)</span></Link>
+                                <Link className="nav-link" to="/admin/Home" href="#">Home <span className="sr-only">(current)</span></Link>
+                            </li>
+                        </div>
+                        <div>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/admin/Categories">Category</Link>
                             </li>
                         </div>
                         <div>
                             <li className="nav-item">
                                 <button className="nav-link btn btn-dark" onClick={()=>{localStorage.clear(); history.push('/admin/Login');}}>Logout</button>
                             </li>
-                        </div>    
+                        </div>
+
                     </div>
              </div>
             </nav>
@@ -49,7 +56,7 @@ const AdminNavbar = () => {
                 <a href="#">About</a>
                 <a href="#">Services</a>
                 <a href="#">Clients</a>
-                <a href="#">Contact</a>
+                <a href="#">Contacts</a>
                 
                 </div>
             </div>

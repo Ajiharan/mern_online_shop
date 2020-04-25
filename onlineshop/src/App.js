@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import './App.css';
 import Register from './user/Register';
-import Login from './user/Login';
+import Login from './user/login';
 import Home from './user/Home';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +14,7 @@ import UserDashboard from './user/Dashboard';
 import AdminNavbar from './adminNavbar/AdminNavbar';
 import AdminHome from './admin/Home';
 import AdminLogin from './admin/Login';
+import Categories from "./admin/Categories";
 
 function App(props) {
  
@@ -29,7 +30,7 @@ function App(props) {
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route exact path="/user/Register" component={Register}/>
-      <Route exact path="/user/Login" component={Login}/> 
+      <Route exact path="/user/Login" component={Login}/>
       <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
       <Route exact component={PageNotFound}/>
     </Switch>
@@ -40,8 +41,9 @@ function App(props) {
     UserNavigation=<div className="App">
     <AdminNavbar/>
       <Switch>
-      <AdminProtected exact path="/admin/home" component={AdminHome}/> 
-      <Route exact path="/admin/Login" component={AdminLogin}/> 
+      <AdminProtected exact path="/admin/Home" component={AdminHome}/>
+      <Route exact path="/admin/Login" component={AdminLogin}/>
+      <Route exact path="/admin/Categories" component={Categories}/>
       <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   
@@ -53,7 +55,7 @@ function App(props) {
       <Route exact path="/" component={Home}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/admin/Login" component={AdminLogin}/> 
-      <Route exact path="/user/Login" component={Login}/> 
+      <Route exact path="/user/Login" component={Login}/>
       <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
       <Route exact component={PageNotFound}/>
     </Switch>
