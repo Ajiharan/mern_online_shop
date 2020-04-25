@@ -15,24 +15,15 @@ import AdminNavbar from './adminNavbar/AdminNavbar';
 import AdminHome from './admin/Home';
 import AdminLogin from './admin/Login';
 
-function App() {
-  const [utokens,setuserToken]=useState("");
-  const [atokens,setadminToken]=useState("");
-
-  let userhasToken="";
-  let adminhasToken="";
+function App(props) {
+ 
+ 
   let UserNavigation="";
 
-  useEffect(()=>{
-    console.log("UseEffect Called....");
-    userhasToken=JSON.parse(localStorage.getItem('auth'));
-    adminhasToken=JSON.parse(localStorage.getItem('auth_admin'));
-    setuserToken(userhasToken);
-    setadminToken(adminhasToken);
-  });
+  
   
 
-  if(utokens){
+  if(props.uToken){
     UserNavigation=<div className="App">
     <Navbar/>
     <Switch>
@@ -44,7 +35,7 @@ function App() {
     </Switch>
     <ToastContainer autoClose={1400} />   
   </div>
-  }else if(atokens){
+  }else if(props.aToken){
 
     UserNavigation=<div className="App">
     <AdminNavbar/>
