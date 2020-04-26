@@ -58,3 +58,28 @@ code {
 .openbtn:hover {
   background-color:#444;
 }
+
+
+.admin-category-container{
+  display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+#admin-div{
+  display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  
+    flex-wrap: nowrap;
+}
+
+.admin-navbar-top{
+  display: flex;
+    justify-content: space-around;
+}
+
+.admin-navbar-top div{
+  margin-left: 8px;
+}

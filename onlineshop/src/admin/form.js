@@ -50,7 +50,7 @@ class InfoForm extends React.Component {
 
     render() {
         return (
-            <div style={{height:"200px",width:"500px"}}>
+            <div  className="container" style={{height:"200px",width:"500px"}}>
             <form  onSubmit={this.infoSubmit} autoComplete="off">
                 <div className="form-group">
                     <label htmlFor="Name">Category Name:</label>

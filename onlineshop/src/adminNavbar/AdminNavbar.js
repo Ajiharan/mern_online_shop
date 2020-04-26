@@ -31,19 +31,22 @@ const AdminNavbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <div className="navbar-nav" id="admin-div">
-                        <div>
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="/admin/Home" href="#">Home <span className="sr-only">(current)</span></Link>
-                            </li>
+                        <div className="admin-navbar-top">
+                            <div>
+                                <li className="nav-item active">
+                                    <Link className="nav-link" to="/admin/Home" href="#">Home <span className="sr-only">(current)</span></Link>
+                                </li>
+                            </div>
+                            <div>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/admin/Categories">Category</Link>
+                                </li>
+                            </div>
                         </div>
+                      
                         <div>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/admin/Categories">Category</Link>
-                            </li>
-                        </div>
-                        <div>
-                            <li className="nav-item">
-                                <button className="nav-link btn btn-dark" onClick={()=>{localStorage.clear(); history.push('/admin/Login');}}>Logout</button>
+                                <button className="nav-link btn btn-info text-light" onClick={()=>{localStorage.clear(); history.push('/admin/Login');}}>Logout</button>
                             </li>
                         </div>
 

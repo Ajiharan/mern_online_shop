@@ -110,9 +110,7 @@ const Login = (props) => {
                              <p className="container-condition"> By contuning you agree to Darkz's 
                                  <a href="#"> condition of use</a> and  <a href="#"> privacy Policy</a></p>
                              </div>
-                             <div className="container-login">
-                                 <p  className="container-condition">Don't Have any Account<a href="#" onClick={()=>{window.location.href="Register"}}> creating an account </a> </p>
-                             </div>               
+                                     
                      </form>
                  </div>
             

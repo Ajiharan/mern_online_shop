@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import './App.css';
 import Register from './user/Register';
-import Login from './user/login';
+import Login from './user/Login';
 import Home from './user/Home';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -43,7 +43,7 @@ function App(props) {
       <Switch>
       <AdminProtected exact path="/admin/Home" component={AdminHome}/>
       <Route exact path="/admin/Login" component={AdminLogin}/>
-      <Route exact path="/admin/Categories" component={Categories}/>
+      <AdminProtected exact path="/admin/Categories" component={Categories}/>
       <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   

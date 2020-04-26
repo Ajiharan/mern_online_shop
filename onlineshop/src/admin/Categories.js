@@ -61,14 +61,14 @@ class Categories extends React.Component{
 
     render() {
         return (
-            <div>
-                <div className="row">
-                    <div className="col-6">
-                        <h5>Add Category</h5>
+            <div className="container">
+                <div className="row admin-category-container">
+                    <div>
+                        <h5 className="text-center">Add Category</h5>
                         <InfoForm myData = {this.create} setForm ={this.state.editableData}/>
                     </div>
-                    <div className="col-6">
-                        <h5>Category Info</h5>
+                    <div >
+                        <h5 className="text-center">Category Info</h5>
                         <InfoDetails getData ={this.state.data} setData ={this.update} del ={this.del}/>
                     </div>
                 </div>
