@@ -7,9 +7,9 @@ const jwt=require('jsonwebtoken');
 
 
 
-router.get("/register",(req,res)=>{
-    res.status(200).json("Hello Store manager");
-});
+// router.get("/register",(req,res)=>{
+//     res.status(200).json("Hello Store manager");
+// });
 
 router.post('/register',async (req,res)=>{
     StoreManagerSchema.findOne({email:req.body.email}).then(async data=>{

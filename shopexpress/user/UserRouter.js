@@ -5,14 +5,14 @@ const bcryptjs=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
 
-router.get('/register',(req,res)=>{
-    UserSchema.find().then(data=>{
-        res.status(200).json(data);
-    }).catch(err=>{
-        res.status(400).json(err);
-    })
+// router.get('/register',(req,res)=>{
+//     UserSchema.find().then(data=>{
+//         res.status(200).json(data);
+//     }).catch(err=>{
+//         res.status(400).json(err);
+//     })
     
-});
+// });
 
 router.post('/register',async (req,res)=>{
     UserSchema.findOne({email:req.body.email}).then(async data=>{
