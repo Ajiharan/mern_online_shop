@@ -5,6 +5,7 @@ const morgan=require('morgan');
 const cors=require('cors');
 const userRouter=require('./user/UserRouter');
 const adminRouter=require('./admin/AdminRouter');
+const storeManagerRouter=require('./admin-storeManager/StoreManagerRouter');
 const categoryRouter=require('./category/CategoryRouter');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
@@ -21,6 +22,7 @@ app.get('/',(req,res)=>{
 app.use('/user',userRouter);
 app.use('/admin',adminRouter);
 app.use('/category',categoryRouter);
+app.use('/admin/manager',storeManagerRouter);
 
 app.listen(3000,(err)=>{
     if(err)

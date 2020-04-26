@@ -1,5 +1,5 @@
 .register-main-container{
-  height:680px;
+  height:700px;
   border:1px solid rgb(139, 130, 130);
   margin-top: 30px;
   margin-left: 15px;
@@ -143,6 +143,10 @@ label{
   display: flex;
   justify-content:center;
   
+}
+
+#top-nav .nav-link{
+  padding:0;
 }
 
 .navbar-nav .dropdown-menu{
