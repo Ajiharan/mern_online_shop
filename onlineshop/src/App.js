@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from 'react';
-import './App.css';
 import Register from './user/Register';
 import Login from './user/Login';
 import Home from './user/Home';

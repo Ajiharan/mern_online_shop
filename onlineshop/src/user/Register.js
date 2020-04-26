@@ -78,7 +78,17 @@ const Register = (props) => {
             let isUser=document.querySelector("#store-manager") .checked;
             
             if(isUser){
-
+                axios.post("http://localhost:3000/admin/manager/register",formData).then(res=>{
+                    toast.success("Successfully registered!!!", {
+                        position: toast.POSITION.TOP_RIGHT
+                      });
+                      props.history.push('/user/Register');
+                  }).catch(err=>{
+                  //  console.log(JSON.stringify(err.response.data));
+                    toast.error(err.response.data, {
+                        position: toast.POSITION.TOP_RIGHT
+                      });
+                  }); 
             }else{
                 axios.post("http://localhost:3000/user/register",formData).then(res=>{
                     toast.success("Successfully registered!!!", {
@@ -121,6 +131,9 @@ const Register = (props) => {
                      <img src={require('../images/logo.png')} alt="Smiley face" height="150px;" width="150px;" />
                 </div>
                
+            </div>
+            <div>
+                
             </div>
             <div className="container-main-row row">        
                 <div className="register-main-container">

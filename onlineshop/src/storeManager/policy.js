@@ -3,7 +3,7 @@ import React from 'react';
 const policy = () => {
     return (
         <div className="modal fade" id="myModal">
-          <div className="modal-dialog">
+          <div className="modal-dialog" id="policy-model">
              <div className="modal-content">  
                 <div className="modal-header">
                     <h4 className="modal-title">Store-manager Policy</h4>
@@ -14,8 +14,8 @@ const policy = () => {
                   policy
                 </div>
               
-                <div className="modal-footer">
-                   <button type="button" className="btn btn-success" data-dismiss="modal">Okay</button>
+                <div className="modal-footer" >
+                   <button type="button" className="btn btn-success" data-dismiss="modal">Accept Policy</button>
                 </div>
         
              </div>

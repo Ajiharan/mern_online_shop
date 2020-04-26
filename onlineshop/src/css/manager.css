@@ -1,0 +1,9 @@
+#policy-model .modal-footer{
+    display: flex;
+    justify-content: center;
+}
+
+#policy-model .modal-title{
+    margin-left: 95px;
+
+}

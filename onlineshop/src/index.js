@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './css/admin.css';
+import './css/manager.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
-
+import './css/user.css';
 class Index extends React.Component{
   
   constructor(props){
