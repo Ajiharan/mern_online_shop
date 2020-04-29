@@ -8,7 +8,7 @@ import ManagerPolicy from '../storeManager/policy';
 
 const Register = (props) => {
     let hasToken=JSON.parse(localStorage.getItem('auth'));
-    const [displaypolicy,setDisplay]=useState(false);
+    const [displayEvent,setDisplay]=useState(false);
     useEffect(()=>{
         console.log("useEffect");
        let tname= document.querySelector("#name");
@@ -169,7 +169,7 @@ const Register = (props) => {
                         }
 
                          <div className="form-group">
-                         <label htmlFor="store-manager" onClick={()=>{setDisplay(!displaypolicy)}} data-toggle="modal" data-target="#myModal" className="text-info"> <input id="store-manager" type="checkbox"/>Register As StoreManager</label>
+                         <label htmlFor="store-manager" data-toggle="modal" data-target="#myModal" className="text-info"> <input id="store-manager" type="checkbox"/>Register As StoreManager</label>
                         </div>                   
                             <div id="button-group" className="row">   
                                 <div>
@@ -186,9 +186,7 @@ const Register = (props) => {
                             </div>               
                     </form>
                 </div>
-                        {
-                            (displaypolicy)
-                        }
+                       
                 {setPolicy()}
            
             </div>
