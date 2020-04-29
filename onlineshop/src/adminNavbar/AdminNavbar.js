@@ -42,6 +42,11 @@ const AdminNavbar = () => {
                                     <Link className="nav-link" to="/admin/Categories">Category</Link>
                                 </li>
                             </div>
+                            <div>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/admin/mail">Mail</Link>
+                                </li>
+                            </div>
                         </div>
                       
                         <div>

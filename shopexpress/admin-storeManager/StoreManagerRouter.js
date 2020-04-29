@@ -41,4 +41,12 @@ router.post('/register',async (req,res)=>{
 
 });
 
+router.get('/register',async(req,res)=>{
+    StoreManagerSchema.find().select(['-password','-token']).then(async data=>{
+        res.status(200).json(data);
+    }).catch(err=>{
+        res.status(400).json(err);
+    })
+})
+
 module.exports=router;

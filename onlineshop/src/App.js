@@ -14,6 +14,7 @@ import AdminNavbar from './adminNavbar/AdminNavbar';
 import AdminHome from './admin/Home';
 import AdminLogin from './admin/Login';
 import Categories from "./admin/Categories";
+import AdminMail from "./admin/MailActivity";
 
 function App(props) {
  
@@ -41,6 +42,7 @@ function App(props) {
     <AdminNavbar/>
       <Switch>
       <AdminProtected exact path="/admin/Home" component={AdminHome}/>
+      <AdminProtected exact path="/admin/mail" component={AdminMail}/>
       <Route exact path="/admin/Login" component={AdminLogin}/>
       <AdminProtected exact path="/admin/Categories" component={Categories}/>
       <Route exact component={PageNotFound}/>
