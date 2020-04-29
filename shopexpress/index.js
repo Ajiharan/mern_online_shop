@@ -7,7 +7,7 @@ const userRouter=require('./user/UserRouter');
 const adminRouter=require('./admin/AdminRouter');
 const storeManagerRouter=require('./admin-storeManager/StoreManagerRouter');
 const categoryRouter=require('./category/CategoryRouter');
-const {sendEmail}=require('./admin-mail/mailSender');
+const mailRouter=require('./admin-mail/mailSender');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
 require('dotenv/config');
@@ -15,11 +15,6 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
-app.post('/email/sender',(req,res)=>{
-    console.log(req.body);
-    sendEmail(req.body.tomail,req.body.message,"hello");
-    
-});
 
 app.get('/',(req,res)=>{
     res.status(200).json("Welcome Express.js");
@@ -29,6 +24,7 @@ app.use('/user',userRouter);
 app.use('/admin',adminRouter);
 app.use('/category',categoryRouter);
 app.use('/admin/manager',storeManagerRouter);
+app.use('/admin/mail',mailRouter);
 
 app.listen(3000,(err)=>{
     if(err)

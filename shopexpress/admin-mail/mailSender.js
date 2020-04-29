@@ -1,68 +1,72 @@
 const mailer=require('nodemailer');
 const {Hello}=require("./HelloTemplate");
 const {Thanks}=require('./InfoTemplate');
-let data_error="";
-let data_res="";
-// console.log(Hello("sd"));
-const getEmailData=(to,name,template)=>{
+const express=require('express');
+const router=express.Router();
 
-    let data=null;
-
-    switch(template){
-        case "hello":
-            data={
-                from: "Baskaran Ajiharan <mydummy1243@gmail.com>",
-                to:to,
-                subject:`Hello${name}`,
-                html:Hello(name)
-            }
-            break;
-        case "thanks":
-            data={
-                from: "Baskaran Ajiharan <mydummy1243@gmail.com>",
-                to:to,
-                subject:`Thanks${name}`,
-                html:Thanks(name)
-            }
-            break;
-        default:
-            data;
-            
-    }
-
-    return data;
-
-}
-
-const sendEmail=(to,name,type)=>{
-    const smtpTransport=mailer.createTransport({
-        service:"gmail",
-      
-        auth:{
-            user:'mydummy1243@gmail.com',
-            pass:'Dummy0000t%'
-        }
-    });
-    const mail=getEmailData(to,name,type);
-    console.log(mail);
-
-    smtpTransport.sendMail(mail,(error,response)=>{
-        data_res=response;
-        data_error=error;
-        if(error){
-            console.log("MyError",error);
-        }else{
-            console.log("Mail sent Successfully");
-           
-        }
-      
-    });
+router.post('/sender',async(req,res)=>{
    
+        const smtpTransport=await mailer.createTransport({
+            service:"gmail",
+          
+            auth:{
+                user:'mydummy1243@gmail.com',
+                pass:'dummy'
+            }
+        });
+        
+       
+    const getEmailData=(to,name,template)=>{
 
-    smtpTransport.close();
-    // console.log(smtpTransport);
-  
-  
-}
+        let data=null;
+    
+        switch(template){
+            case "hello":
+                data={
+                    from: "Baskaran Ajiharan <mydummy1243@gmail.com>",
+                    to:to,
+                    subject:`Hello${name}`,
+                    html:Hello(name)
+                }
+                break;
+            case "thanks":
+                data={
+                    from: "Baskaran Ajiharan <mydummy1243@gmail.com>",
+                    to:to,
+                    subject:`Thanks${name}`,
+                    html:Thanks(name)
+                }
+                break;
+            default:
+                data;
+                
+        }
+    
+        return data;
+    
+    }
+    const mail=await getEmailData(req.body.tomail,req.body.message,"hello");
+        
+    
+        smtpTransport.sendMail(mail,(error,response)=>{
+          
+            if(error){
+                console.log("MyError",error);
+                res.status(400).json("Mail is not sent");
+            }else{
+                console.log("Mail sent Successfully");
+                res.status(200).json("Mail sent Successfully")
+            }
+          
+        });
 
-module.exports={sendEmail};
+    smtpTransport.close();   
+    
+});
+
+module.exports=router;
+
+
+
+
+
