@@ -13,9 +13,9 @@ const StoreManagerSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    token:{
-        type:String,
-        default:null
+    isManager:{
+        type:Boolean,
+        default:false
     }
 });
 

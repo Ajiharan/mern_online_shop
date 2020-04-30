@@ -82,7 +82,7 @@ const Register = (props) => {
                     toast.success("Successfully registered!!!", {
                         position: toast.POSITION.TOP_RIGHT
                       });
-                      props.history.push('/user/Register');
+                      props.history.push('/user/Login');
                   }).catch(err=>{
                   //  console.log(JSON.stringify(err.response.data));
                     toast.error(err.response.data, {

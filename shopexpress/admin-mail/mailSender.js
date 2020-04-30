@@ -1,6 +1,7 @@
 const mailer=require('nodemailer');
 const {Hello}=require("./HelloTemplate");
 const {Thanks}=require('./InfoTemplate');
+const StoreManagerSchema=require('../admin-storeManager/StoreManagerSchema');
 const express=require('express');
 const router=express.Router();
 
@@ -48,14 +49,22 @@ router.post('/sender',async(req,res)=>{
     const mail=await getEmailData(req.body.tomail,req.body.message,"hello");
         
     
-        smtpTransport.sendMail(mail,(error,response)=>{
+        smtpTransport.sendMail(mail,async(error,response)=>{
           
             if(error){
                 console.log("MyError",error);
                 res.status(400).json("Mail is not sent");
             }else{
-                console.log("Mail sent Successfully");
-                res.status(200).json("Mail sent Successfully")
+                // console.log("Mail sent Successfully");
+                let updated=await StoreManagerSchema.update({email:req.body.tomail},{$set:{isManager:true}});
+                if(updated){
+                    console.log("Mail sent Successfully and updated");
+                    res.status(200).json("Mail sent Successfully");
+                }
+                else{
+                    console.log("Mail sent Successfully");
+                    res.status(200).json("Mail sent Successfully");
+                }
             }
           
         });

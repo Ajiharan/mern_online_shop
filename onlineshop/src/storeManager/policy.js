@@ -11,11 +11,13 @@ const policy = () => {
                 </div>
            
                 <div className="modal-body">
-                  policy
+                A store Manager account policy is a document which outlines the requirements for requesting and maintaining 
+                an account on computer systems or networks, typically within an organization.
+                 It is very important for large sites where users typically have accounts on many systems.
                 </div>
               
                 <div className="modal-footer" >
-                   <button type="button" className="btn btn-success" data-dismiss="modal">Accept Policy</button>
+                   <button type="button" className="btn btn-success" data-dismiss="modal">Agree with Policy</button>
                 </div>
         
              </div>

@@ -34,7 +34,7 @@ const AdminNavbar = () => {
                         <div className="admin-navbar-top">
                             <div>
                                 <li className="nav-item active">
-                                    <Link className="nav-link" to="/admin/Home" href="#">Home <span className="sr-only">(current)</span></Link>
+                                    <Link className="nav-link" to="/" href="#">Home <span className="sr-only">(current)</span></Link>
                                 </li>
                             </div>
                             <div>

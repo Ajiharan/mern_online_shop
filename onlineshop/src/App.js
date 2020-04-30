@@ -41,7 +41,7 @@ function App(props) {
     UserNavigation=<div className="App">
     <AdminNavbar/>
       <Switch>
-      <AdminProtected exact path="/admin/Home" component={AdminHome}/>
+      <AdminProtected exact path="/" component={AdminHome}/>
       <AdminProtected exact path="/admin/mail" component={AdminMail}/>
       <Route exact path="/admin/Login" component={AdminLogin}/>
       <AdminProtected exact path="/admin/Categories" component={Categories}/>
