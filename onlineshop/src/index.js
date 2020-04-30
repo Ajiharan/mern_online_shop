@@ -12,19 +12,23 @@ class Index extends React.Component{
     super(props);
       this.userhasToken="";
       this.adminhasToken="";
+      this.managerhasToken="";
     this.state={
       uTokens:"",
-      aTokens:""
+      aTokens:"",
+      sTokens:"",
     }
   }
 
   getAll(){
     this.userhasToken=JSON.parse(localStorage.getItem('auth'));
     this.adminhasToken=JSON.parse(localStorage.getItem('auth_admin'));
-   
+    this.managerhasToken=JSON.parse(localStorage.getItem('auth_manager'));
+
     this.setState({
       uTokens:this.userhasToken,
-      aTokens:this.adminhasToken
+      aTokens:this.adminhasToken,
+      sTokens:this.userhasToken
     });
   }
 
@@ -32,14 +36,17 @@ class Index extends React.Component{
     setInterval(()=>{
     //  console.log("sdsd");
       this.userhasToken=JSON.parse(localStorage.getItem('auth'));
-      this.adminhasToken=JSON.parse(localStorage.getItem('auth_admin'))
+      this.adminhasToken=JSON.parse(localStorage.getItem('auth_admin'));
+      this.managerhasToken=JSON.parse(localStorage.getItem('auth_manager'));
           // console.log("state asdminas TOken",this.state.aTokens);
           // console.log("AdminHas TOken",this.adminhasToken);
-      if((this.state.uTokens !==this.userhasToken) || (this.state.aTokens !==this.adminhasToken)){
+      if((this.state.uTokens !==this.userhasToken) || (this.state.aTokens !==this.adminhasToken) ||  (this.state.sTokens !==this.managerhasToken)){
         console.log("state changed");
+        // console.log("Manager",this.managerhasToken);
         this.setState({
           uTokens:this.userhasToken,
-          aTokens:this.adminhasToken
+          aTokens:this.adminhasToken,
+          sTokens:this.managerhasToken
         });
       }
     },10)
@@ -56,7 +63,7 @@ class Index extends React.Component{
   render(){
     return(
       <BrowserRouter>
-      <App uToken={this.state.uTokens} aToken={this.state.aTokens} />
+      <App uToken={this.state.uTokens} aToken={this.state.aTokens} sToken={this.state.sTokens}/>
       </BrowserRouter>
     )
   }

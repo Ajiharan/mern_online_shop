@@ -15,7 +15,10 @@ import AdminHome from './admin/Home';
 import AdminLogin from './admin/Login';
 import Categories from "./admin/Categories";
 import AdminMail from "./admin/MailActivity";
-
+import StoreManagerNavbar from "./managerNavbar/Navbar";
+import ManagerProtected from "./storeManager/StoreManagerProtected";
+import ManagerHome from "./storeManager/Home";
+import ManagerLogin from "./storeManager/Login";
 function App(props) {
  
  
@@ -49,6 +52,18 @@ function App(props) {
     </Switch>
     <ToastContainer autoClose={1400} />   
   </div>
+  }else if(props.sToken){
+    UserNavigation= <div className="App">
+    <StoreManagerNavbar/>
+      <Switch>
+     
+      <ManagerProtected  exact path="/" component={ManagerHome}/>
+     
+      <Route exact component={PageNotFound}/>
+    </Switch>
+    <ToastContainer autoClose={1400} />   
+  </div>
+
   }else{
     UserNavigation=<div className="App">
     <Navbar/>
@@ -57,6 +72,7 @@ function App(props) {
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/admin/Login" component={AdminLogin}/> 
       <Route exact path="/user/Login" component={Login}/>
+      <Route exact path="/manager/Login" component={ManagerLogin}/>
       <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
       <Route exact component={PageNotFound}/>
     </Switch>
