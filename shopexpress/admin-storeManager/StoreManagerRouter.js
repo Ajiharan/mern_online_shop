@@ -57,6 +57,9 @@ router.post('/login',async(req,res)=>{
             if(!validPass){
                 return res.status(400).json("Invalid Password");
             }
+            if(!data.isManager){
+                return res.status(400).json("Sorry you can't login");
+            }
 
             let ManagerToken=await jwt.sign({_id:data._id,email:data.email},"store");
             res.header('auth_manager',ManagerToken).send(ManagerToken);

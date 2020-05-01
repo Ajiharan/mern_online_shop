@@ -50,7 +50,7 @@ class MailActivity extends React.Component {
     }
 
     updateTableData=(event)=>{
-        let url="http://localhost:3001/store/login"
+        let url="http://localhost:3001/manager/Login"
         let postData={message:url,tomail:event.email}
        axios.post('http://localhost:3000/admin/mail/sender',postData).then(res=>{
            alert("Message Sent Successfully");
