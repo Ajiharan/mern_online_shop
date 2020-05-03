@@ -1,6 +1,5 @@
 const router=require('express').Router();
 const ProductInfo=require('./ProductSchema');
-const multer = require('multer');
 
 router.get("/",(req,res) =>{
     res.json("I am from product router file");
