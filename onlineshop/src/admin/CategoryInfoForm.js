@@ -1,6 +1,6 @@
 import React from "react";
 
-class InfoForm extends React.Component {
+class CategoryInfoForm extends React.Component {
     constructor() {
         super();
         this.state={
@@ -51,17 +51,17 @@ class InfoForm extends React.Component {
     render() {
         return (
             <div  className="container" style={{height:"200px",width:"500px"}}>
-            <form  onSubmit={this.infoSubmit} autoComplete="off">
-                <div className="form-group">
-                    <label htmlFor="Name">Category Name:</label>
-                    <input type="text" className="form-control"
-                           onChange={this.infoChange}
-                           name = "name"
-                           value = {this.state.name}/>
-                </div>
+                <form  onSubmit={this.infoSubmit} autoComplete="off">
+                    <div className="form-group">
+                        <label htmlFor="Name">Category Name:</label>
+                        <input type="text" className="form-control"
+                               onChange={this.infoChange}
+                               name = "name"
+                               value = {this.state.name}/>
+                    </div>
 
-                <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button>
-            </form>
+                    <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button>
+                </form>
             </div>
         );
     }
@@ -70,4 +70,4 @@ class InfoForm extends React.Component {
 
 }
 
-export default InfoForm
+export default CategoryInfoForm

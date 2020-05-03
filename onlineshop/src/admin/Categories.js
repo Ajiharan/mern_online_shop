@@ -1,6 +1,6 @@
 import React from 'react';
-import InfoDetails from './table';
-import InfoForm from "./form";
+import CategoryInfoDetails from './CategoryInfoDetails';
+import CategoryInfoForm from "./CategoryInfoForm";
 import axios from 'axios';
 
 class Categories extends React.Component{
@@ -65,11 +65,11 @@ class Categories extends React.Component{
                 <div className="row admin-category-container">
                     <div>
                         <h5 className="text-center">Add Category</h5>
-                        <InfoForm myData = {this.create} setForm ={this.state.editableData}/>
+                        <CategoryInfoForm myData = {this.create} setForm ={this.state.editableData}/>
                     </div>
                     <div >
                         <h5 className="text-center">Category Info</h5>
-                        <InfoDetails getData ={this.state.data} setData ={this.update} del ={this.del}/>
+                        <CategoryInfoDetails getData ={this.state.data} setData ={this.update} del ={this.del}/>
                     </div>
                 </div>
             </div>
