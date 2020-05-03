@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import Register from './user/Register';
-import Login from './user/Login';
+import Login from './user/login';
 import Home from './user/Home';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,8 @@ import StoreManagerNavbar from "./managerNavbar/Navbar";
 import ManagerProtected from "./storeManager/StoreManagerProtected";
 import ManagerHome from "./storeManager/Home";
 import ManagerLogin from "./storeManager/Login";
+import Product from "./storeManager/Product";
+
 function App(props) {
  
  
@@ -56,10 +58,10 @@ function App(props) {
     UserNavigation= <div className="App">
     <StoreManagerNavbar/>
       <Switch>
-     
       <ManagerProtected  exact path="/" component={ManagerHome}/>
-     
-      <Route exact component={PageNotFound}/>
+      <Route exact path="/manager/AddProduct" component={Product}/>
+
+        <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   
   </div>
@@ -73,7 +75,7 @@ function App(props) {
       <Route exact path="/admin/Login" component={AdminLogin}/> 
       <Route exact path="/user/Login" component={Login}/>
       <Route exact path="/manager/Login" component={ManagerLogin}/>
-      <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
+      <UserProtected exact path="/user/dashboard" component={UserDashboard}/>
       <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   
