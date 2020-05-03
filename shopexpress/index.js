@@ -7,6 +7,7 @@ const userRouter=require('./user/UserRouter');
 const adminRouter=require('./admin/AdminRouter');
 const storeManagerRouter=require('./admin-storeManager/StoreManagerRouter');
 const categoryRouter=require('./category/CategoryRouter');
+const productRouter=require('./products/ProductRouter');
 const mailRouter=require('./admin-mail/mailSender');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
@@ -15,16 +16,17 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
-
 app.get('/',(req,res)=>{
     res.status(200).json("Welcome Express.js");
 });
+
 
 app.use('/user',userRouter);
 app.use('/admin',adminRouter);
 app.use('/category',categoryRouter);
 app.use('/admin/manager',storeManagerRouter);
 app.use('/admin/mail',mailRouter);
+app.use('/product',productRouter);
 
 app.listen(3000,(err)=>{
     if(err)
