@@ -1,6 +1,6 @@
 import React from "react";
 
-class InfoDetails extends React.Component{
+class InfoDetailsProduct extends React.Component{
     constructor() {
         super();
     }
@@ -10,11 +10,15 @@ class InfoDetails extends React.Component{
             <table className="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Category Name</th>
+                    <th>Product Name</th>
+                    <th>Category Type</th>
+                    <th>Product Price</th>
+                    <th>Image</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
+
                 <tbody>
                 {
                     this.props.getData.length > 0 ?
@@ -22,10 +26,13 @@ class InfoDetails extends React.Component{
                             this.props.getData.map(e =>
                                 <tr key={e._id}>
                                     <td>{e.name}</td>
-                                    <td><button className="btn-btb-primary"
-                                    onClick ={event =>{
-                                            this.props.setData(e)
-                                    }}
+                                    <td>{e.category}</td>
+                                    <td>{e.price}</td>
+                                    <td><img style={{height:"35px",width:"50px"}} src={e.imageUrl} alt="alt"/></td>
+                                    <td><button
+                                                onClick ={event =>{
+                                                    this.props.setData(e)
+                                                }}
                                     >Edit</button></td>
                                     <td><button
                                         onClick ={event =>{
@@ -51,4 +58,4 @@ class InfoDetails extends React.Component{
 
 }
 
-export default InfoDetails
+export default InfoDetailsProduct
