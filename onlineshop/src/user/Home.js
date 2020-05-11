@@ -31,11 +31,14 @@ const Home = (props) => {
                 tempcategoryData=res.data
               });
 
-              if((JSON.stringify(productData) !==JSON.stringify(tempProductData))||(JSON.stringify(categoryData) !==JSON.stringify(tempcategoryData))){
+              if((JSON.stringify(productData) !==JSON.stringify(tempProductData))){
                 SetData( tempProductData);
+               
+              }
+              if((JSON.stringify(categoryData) !==JSON.stringify(tempcategoryData))){
                 setCategoryData(tempcategoryData);
               }
-        },3000)
+        },30000)
 
     }
 

@@ -1,9 +1,9 @@
 import React from 'react';
-
+import Profile_configuration from '../user-profile-components/Profile_configuration';
 const Dashboard = () => {
     return (
-        <div>
-            <p>My Dashboard</p>
+        <div className="container">
+           <Profile_configuration/>
         </div>
     );
 };
