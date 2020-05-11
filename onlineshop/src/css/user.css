@@ -107,7 +107,20 @@
     flex-wrap: wrap;
   }
 
-  #navbarNavDropdown  .dropdown-item:hover{
+  #navbarNavDropdown #u_dropdown .dropdown-item:hover{
+    background-color: orange;
+    color:white;
+  }
+
+  .navbar-nav .profile_drop{
+    position: absolute;
+    margin-top:10px;
+  }
+  .navbar-nav .profile_drop  button {
+    width:100%;
+  }
+
+  .navbar-nav .profile_drop .dropdown-item:hover{
     background-color: orange;
     color:white;
   }
@@ -154,25 +167,29 @@
     padding:0;
   }
   
-  .navbar-nav .dropdown-menu{
+  .navbar-nav #u_dropdown{
     position: absolute;
   }
   
 
-  #product_doc{
+  /* #product_doc{
     display: flex;
-    justify-content:space-around;
+    justify-content:space-between;
     flex-direction: row;
     flex-wrap: wrap;
+  } */
+
+  #product_doc .my-card{
+    border:1px solid grey;
   }
 
   #product_doc div{
-    box-shadow: 1px 1px 1px wheat;
+   
     margin: 20px;
   }
   #home-category-nav{
     display: flex;
-    justify-content:space-between;
+    justify-content:flex-start;
     flex-wrap: nowrap;
   }
   

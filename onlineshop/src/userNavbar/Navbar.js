@@ -7,6 +7,7 @@ import {
     Link,
     useHistory
   } from "react-router-dom";
+  let currentData=null;
 const Navbar = () => {
  
     const [userData,setUserData]=useState({});
@@ -14,17 +15,22 @@ const Navbar = () => {
 
     useEffect(()=>{
         let hasToken=JSON.parse(localStorage.getItem('auth'));
-        if(hasToken){
-            axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
-                console.log(res.data);   
-               setUserData(res.data);
-                    
-              }).catch(err=>{
-                console.log(err);        
-              }); 
+        
+        if(JSON.stringify(currentData) !== JSON.stringify(userData)){
+            if(hasToken){
+                axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
+                    console.log(res.data);   
+                    currentData=res.data;
+                   setUserData(res.data);
+                        
+                  }).catch(err=>{
+                    console.log(err);        
+                  }); 
+            }
         }
        
-    },[]);
+       
+    });
 
     let hasToken=JSON.parse(localStorage.getItem('auth'));
     let protectedViews="";
@@ -41,7 +47,15 @@ const Navbar = () => {
             <div className="protect navbar-nav">
 
                 <div className="nav-item" id="profile">
-                     <Link className="nav-link" to="/user/dashboard">Hi {userData.name}</Link>
+                <div className="dropdown">
+                     <a href="#" className="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {userData.name}</a>
+                     <div className="dropdown-menu dropdown-menu-right profile_drop" aria-labelledby="dropdownMenu2">
+                        <Link className="dropdown-item" type="button" to="/user/dashboard"><i className="fas fa-user"> </i> My Account</Link>
+                        <Link className="dropdown-item" type="button" to="/user/dashboard"><i className="fas fa-list-alt"> </i> Wishlist</Link>
+                        <Link className="dropdown-item" type="button" to="/user/dashboard"><i className="fas fa-credit-card"></i> Card Details</Link>
+                    </div>
+                </div>
+                    
                 </div>
                 <div className="nav-item">
                     <button onClick={()=>{localStorage.clear(); history.push('/user/Login');}} className="btn btn-dark">Logout</button>
@@ -65,9 +79,9 @@ const Navbar = () => {
                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Login
                     </a>
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <Link className="dropdown-item" to="/user/Login">User-login</Link>
-                        <Link className="dropdown-item" to="/admin/Login">Admin-login</Link>
+                    <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="u_dropdown">
+                        <Link className="dropdown-item" to="/user/Login"><i className="fas fa-sign-in-alt"></i> User login</Link>
+                        <Link className="dropdown-item" to="/admin/Login"><i className="fas fa-sign-in-alt"></i> Admin login</Link>
                 
                     </div>
                 </div>
