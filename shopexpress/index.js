@@ -11,6 +11,7 @@ const productRouter=require('./products/ProductRouter');
 const mailRouter=require('./admin-mail/mailSender');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
+mongoose.set('useFindAndModify',false);
 require('dotenv/config');
 app.use(express.json());
 app.use(morgan('dev'));

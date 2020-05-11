@@ -24,6 +24,12 @@ class Categories extends React.Component{
         else{
             axios.put("http://localhost:3000/category/update",data).then(res =>{
                 this.getAll();
+            });
+            let copyData=this.state.editableData;
+            copyData._id=null;
+            this.setState({
+               
+                editableData:copyData
             })
         }
 
@@ -36,7 +42,8 @@ class Categories extends React.Component{
     getAll(){
         axios.get("http://localhost:3000/category/view").then(res=> {
             this.setState({
-                data : res.data
+                data : res.data,
+                
             })
         })
     }
@@ -44,7 +51,7 @@ class Categories extends React.Component{
     update = data =>{
         console.log(data);
         this.setState({
-            editableData : data
+            editableData : data,
         })
     }
 
@@ -52,7 +59,7 @@ class Categories extends React.Component{
     del = data=>{
         var option = window.confirm(`Are you sure want to delete ${data.name}`)
         if(option){
-            axios.delete(`http://localhost:3000/category/del/${data._id}`).then(res =>{
+            axios.delete(`http://localhost:3000/category/del`,{params:{id:data._id,cname:data.name}}).then(res =>{
                 console.log(res);
                 this.getAll();
             })

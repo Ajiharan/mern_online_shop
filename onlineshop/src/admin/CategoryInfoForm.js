@@ -34,7 +34,11 @@ class CategoryInfoForm extends React.Component {
                 _id : this.state._id,
                 name : this.state.name
             }
+            this.setState({
+                isEdit:false
+            });
             this.props.myData(data);
+            
         }
 
     }

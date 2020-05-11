@@ -1,3 +1,4 @@
+const ProductSchema=require('../products/ProductSchema');
 const router=require('express').Router();
 const CategoryInfo=require('./CategorySchema');
 
@@ -29,9 +30,13 @@ router.put("/update",async (req,res) =>{
     res.json(update);
 })
 
-router.delete("/del/:id",async (req,res) =>{
-    var delData = await CategoryInfo.findByIdAndRemove(req.params.id).then(e =>{
-        res.json({message:"Deleted sucessfully"})
+router.delete("/del",async (req,res) =>{
+    console.log("Params",req.query);
+    var delData = await CategoryInfo.findByIdAndRemove(req.query.id).then(e =>{
+        ProductSchema.deleteMany({category:req.query.cname}).then(result=>{
+            res.json({message:"Deleted sucessfully"})
+        })
+       
     })
 })
 
