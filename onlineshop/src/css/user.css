@@ -192,7 +192,7 @@
   #home-category-nav  div{
     flex-grow: 1;
   }
-  #profile-user-container input{
+  #profile-user-container input,#profile-pass-container input{
     border: none;
     border-bottom:1px solid  #5aa2d7;
     outline: none;
