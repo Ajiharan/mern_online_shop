@@ -22,6 +22,14 @@ router.get("/view",async(req,res) =>{
     res.json(findData);
 })
 
+router.get('/getAll',async (req,res)=>{
+     ProductInfo.aggregate([
+        {"$group" : {_id:{name:"$category"}, count:{$sum:1}}}
+     ]).then(result=>{
+        res.json(result);
+     });           
+})
+
 router.put("/update",async (req,res) =>{
     var update = await ProductInfo.update({_id:req.body._id},{$set:{
             name : req.body.name,

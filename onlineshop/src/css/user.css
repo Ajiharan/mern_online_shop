@@ -153,7 +153,21 @@
     position: absolute;
   }
   
-  
-  
-  
+
+  #product_doc{
+    display: flex;
+    justify-content:space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #product_doc div{
+    box-shadow: 1px 1px 1px wheat;
+    margin: 20px;
+  }
+  #home-category-nav{
+    display: flex;
+    justify-content:space-between;
+    flex-wrap: nowrap;
+  }
   

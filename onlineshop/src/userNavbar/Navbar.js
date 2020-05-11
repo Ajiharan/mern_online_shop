@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
+import axios from 'axios';
 import {
     BrowserRouter as Router,
     Switch,
@@ -7,7 +8,20 @@ import {
     useHistory
   } from "react-router-dom";
 const Navbar = () => {
+ 
+    const [userData,setUserData]=useState({});
     const history = useHistory();
+
+    useEffect(()=>{
+        axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
+            console.log(res.data);   
+           setUserData(res.data);
+                
+          }).catch(err=>{
+            console.log(err);        
+          }); 
+    },[]);
+
     let hasToken=JSON.parse(localStorage.getItem('auth'));
     let protectedViews="";
     let publicViews="";
@@ -16,14 +30,14 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <div className="navbar-nav" id="div1">
                 <div className="nav-item active">
-                    <Link to="/" className="nav-link">Home <span class="sr-only">(current)</span></Link>
+                    <Link to="/" className="nav-link">Home <span className="sr-only">(current)</span></Link>
                 </div>             
             
             </div>
             <div className="protect navbar-nav">
 
                 <div className="nav-item" id="profile">
-                    <Link className="nav-link" to="/user/dashboard">profile</Link>
+                     <Link className="nav-link" to="/user/dashboard">Hi {userData.name}</Link>
                 </div>
                 <div className="nav-item">
                     <button onClick={()=>{localStorage.clear(); history.push('/user/Login');}} className="btn btn-dark">Logout</button>
@@ -61,7 +75,7 @@ const Navbar = () => {
     }
    
     return (
-        <div className="navbar navbar-expand-lg navbar-dark bg-dark" id="top-nav">
+        <div className="navbar navbar-expand-lg navbar-dark bg-info" id="top-nav">
             <div className="nav-logo">
                 <div>
                  <a className="navbar-brand" href="#"><img src={require('../images/logo_transparent.png')} alt="Smiley face" height="60px;" width="60px;" /></a>

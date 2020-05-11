@@ -19,6 +19,8 @@ router.get("/view",async(req,res) =>{
     res.json(findData);
 })
 
+
+
 router.put("/update",async (req,res) =>{
     var update = await CategoryInfo.update({_id:req.body._id},{$set:{
             name : req.body.name

@@ -30,6 +30,13 @@ class ProductInfoForm extends React.Component {
 
     handleChange = e => {
         if (e.target.files[0]) {
+            let output=document.querySelector("#img-fire");
+           // console.log("Target",URL.createObjectURL(e.target.files[0]));
+            
+            output.src=URL.createObjectURL(e.target.files[0]);
+            output.onload=function(){
+                URL.revokeObjectURL(output.src);
+            }
             const image = e.target.files[0];
             this.setState(() => ({image}));
         }
@@ -104,7 +111,7 @@ class ProductInfoForm extends React.Component {
 
                 <label htmlFor="Name">Product Image:</label>
                 <br/>
-                <img src={this.state.url || 'http://via.placeholder.com/200x200'} alt="Uploaded images" height="150" width="150"/>
+                <img src={this.state.url || 'http://via.placeholder.com/200x200'} id="img-fire" alt="Uploaded images" height="150" width="150"/>
                 <br/>
                 <progress value={this.state.progress} max="100"/>
                 <br/>
@@ -150,4 +157,4 @@ class ProductInfoForm extends React.Component {
 
 }
 
-export default ProductInfoForm
+export default ProductInfoForm;

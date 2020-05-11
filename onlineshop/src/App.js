@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import Register from './user/Register';
-import Login from './user/login';
+import Login from './user/Login';
 import Home from './user/Home';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,7 +59,7 @@ function App(props) {
     <StoreManagerNavbar/>
       <Switch>
       <ManagerProtected  exact path="/" component={ManagerHome}/>
-      <Route exact path="/manager/AddProduct" component={Product}/>
+      <ManagerProtected exact path="/manager/AddProduct" component={Product}/>
 
         <Route exact component={PageNotFound}/>
     </Switch>
