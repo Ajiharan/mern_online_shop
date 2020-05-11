@@ -16,6 +16,7 @@ const UserProducts = (props) => {
                 {
                     props.ProductData.map((e,i)=>(
                         <div className="card my-card" key={i}>
+                            <i className="far fa-heart" style={{cursor:'pointer'}}></i>
                             <img style={{width:'200px',height:'200px'}} className='card-img-top' src={e.imageUrl}/>
                             <div className="card-body">
                              <h5 className="card-title">{e.name} ${e.price}</h5>

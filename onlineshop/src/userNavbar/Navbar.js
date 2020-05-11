@@ -45,7 +45,9 @@ const Navbar = () => {
             
             </div>
             <div className="protect navbar-nav">
-
+                 <div className="nav-item display-4" style={{margin:'5px',fontSize:'20px'}}>
+                  <a href="#" className="text-light nav-link" > <i className="fas fa-shopping-cart"></i> Shopping Cart</a> 
+                </div>
                 <div className="nav-item" id="profile">
                 <div className="dropdown">
                      <a href="#" className="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {userData.name}</a>
@@ -57,6 +59,7 @@ const Navbar = () => {
                 </div>
                     
                 </div>
+                
                 <div className="nav-item">
                     <button onClick={()=>{localStorage.clear(); history.push('/user/Login');}} className="btn btn-dark">Logout</button>
                 </div>

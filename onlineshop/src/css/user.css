@@ -136,8 +136,7 @@
     margin-left: 8px;
   }
   
-  .protect{
-  
+  .protect{ 
     display: flex;
     flex-direction: row;
     justify-content:flex-start;
@@ -153,14 +152,12 @@
   
   .nav-logo{
     display: flex;
-    justify-content: center;
-   
+    justify-content: center;  
   }
   
   #top-nav{
     display: flex;
-    justify-content:center;
-    
+    justify-content:center;  
   }
   
   #top-nav .nav-link{
@@ -180,16 +177,19 @@
   } */
 
   #product_doc .my-card{
-    border:1px solid grey;
+    border: none;
   }
 
   #product_doc div{
-   
     margin: 20px;
   }
-  #home-category-nav{
+  #home-category-nav {
     display: flex;
-    justify-content:flex-start;
-    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-wrap: wrap;  
+  }
+
+  #home-category-nav  div{
+    flex-grow: 1;
   }
   

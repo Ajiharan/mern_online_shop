@@ -2,6 +2,8 @@ import React,{Fragment,useEffect,useState} from 'react';
 import UserProduct from '../products_components/userProducts'
 import axios from 'axios';
 import CategoryList from '../products_components/products_category_list';
+let tempProductData=[];
+let tempcategoryData=[];
 const Home = (props) => {
     const [productData,SetData]=useState([]);
     const[categoryData,setCategoryData]=useState([]);
@@ -18,21 +20,20 @@ const Home = (props) => {
     },[]);
 
     const getUserProductDatas=()=>{
-        let productList=[];
-        let categoryList=[];
+       
 
         setInterval(()=>{
             axios.get("http://localhost:3000/product/view").then(res=> {
-               productList=res.data;
+                tempProductData=res.data;
              });
      
              axios.get("http://localhost:3000/product/getAll").then(res=> {
-                 categoryList=res.data
+                tempcategoryData=res.data
               });
 
-              if((JSON.stringify(productData) !==JSON.stringify(productList))||(JSON.stringify(categoryData) !==JSON.stringify(categoryList))){
-                SetData( productList);
-                setCategoryData(categoryList);
+              if((JSON.stringify(productData) !==JSON.stringify(tempProductData))||(JSON.stringify(categoryData) !==JSON.stringify(tempcategoryData))){
+                SetData( tempProductData);
+                setCategoryData(tempcategoryData);
               }
         },3000)
 
