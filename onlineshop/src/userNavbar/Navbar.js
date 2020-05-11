@@ -13,13 +13,17 @@ const Navbar = () => {
     const history = useHistory();
 
     useEffect(()=>{
-        axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
-            console.log(res.data);   
-           setUserData(res.data);
-                
-          }).catch(err=>{
-            console.log(err);        
-          }); 
+        let hasToken=JSON.parse(localStorage.getItem('auth'));
+        if(hasToken){
+            axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
+                console.log(res.data);   
+               setUserData(res.data);
+                    
+              }).catch(err=>{
+                console.log(err);        
+              }); 
+        }
+       
     },[]);
 
     let hasToken=JSON.parse(localStorage.getItem('auth'));
@@ -41,7 +45,7 @@ const Navbar = () => {
                 </div>
                 <div className="nav-item">
                     <button onClick={()=>{localStorage.clear(); history.push('/user/Login');}} className="btn btn-dark">Logout</button>
-                </div>;
+                </div>
 
             </div>
         </div>;

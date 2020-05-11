@@ -19,6 +19,7 @@ class CategoryInfoForm extends React.Component {
     }
 
     infoSubmit =event =>{
+        event.preventDefault();
         if(!this.state.isEdit){
             let data ={
                 isEdit: this.state.isEdit,

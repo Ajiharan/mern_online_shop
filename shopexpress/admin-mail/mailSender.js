@@ -12,7 +12,7 @@ router.post('/sender',async(req,res)=>{
           
             auth:{
                 user:'mydummy1243@gmail.com',
-                pass:'password'
+                pass:'pass'
             }
         });
         

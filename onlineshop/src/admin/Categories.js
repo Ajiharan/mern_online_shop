@@ -14,6 +14,7 @@ class Categories extends React.Component{
     }
 
     create = data =>{
+        console.log("Create",data);
         if(!data.isEdit){
             axios.post("http://localhost:3000/category/add",data).then(res=>{
                 this.getAll();

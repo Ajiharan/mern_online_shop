@@ -11,7 +11,7 @@ router.post("/add",async(req,res) =>{
         });
 
     await data.save();
-    res.json(data);
+    res.status(200).json(data);
 })
 
 router.get("/view",async(req,res) =>{

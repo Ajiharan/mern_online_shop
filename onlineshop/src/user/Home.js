@@ -14,7 +14,29 @@ const Home = (props) => {
             setCategoryData(res.data);
          })
 
+         getUserProductDatas();
     },[]);
+
+    const getUserProductDatas=()=>{
+        let productList=[];
+        let categoryList=[];
+
+        setInterval(()=>{
+            axios.get("http://localhost:3000/product/view").then(res=> {
+               productList=res.data;
+             });
+     
+             axios.get("http://localhost:3000/product/getAll").then(res=> {
+                 categoryList=res.data
+              });
+
+              if((JSON.stringify(productData) !==JSON.stringify(productList))||(JSON.stringify(categoryData) !==JSON.stringify(categoryList))){
+                SetData( productList);
+                setCategoryData(categoryList);
+              }
+        },3000)
+
+    }
 
     return (
     <div className="container-fluid">
