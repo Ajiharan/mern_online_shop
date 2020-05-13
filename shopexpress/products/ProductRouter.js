@@ -22,6 +22,13 @@ router.get("/view",async(req,res) =>{
     res.json(findData);
 })
 
+
+router.get("/view_home",async(req,res) =>{
+    var findData = await ProductInfo.find().limit(12);
+    res.json(findData);
+})
+
+
 router.get('/getAll',async (req,res)=>{
      ProductInfo.aggregate([
         {"$group" : {_id:{name:"$category"}, count:{$sum:1}}}

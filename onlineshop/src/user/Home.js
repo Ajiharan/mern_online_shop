@@ -17,13 +17,13 @@ const Home = (props) => {
          })
 
          getUserProductDatas();
+         
+         
     },[]);
 
     const getUserProductDatas=()=>{
-       
-
         setInterval(()=>{
-            axios.get("http://localhost:3000/product/view").then(res=> {
+            axios.get("http://localhost:3000/product/view_home").then(res=> {
                 tempProductData=res.data;
              });
      

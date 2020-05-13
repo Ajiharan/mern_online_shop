@@ -198,11 +198,17 @@
     outline: none;
     border-radius:0px;
   }
+  #profile-user-container .my_image{
+    display: flex;
+    justify-content: center;
+  }
+ 
 
   #profile-user-container{
     border: 1px solid #d3e2ec;
     padding: 20px;
     box-shadow: 0px -20px 1px #5aa2d7;
+    margin-bottom: 15px;
   }
   
   #profile-pass-container{
@@ -210,3 +216,10 @@
     padding: 20px;
     box-shadow: 0px -20px 1px #5aa2d7;
   }
+
+
+#prf_button input{
+  border-radius: 20px;
+  font-size:15px;
+  font-weight: bolder;
+}

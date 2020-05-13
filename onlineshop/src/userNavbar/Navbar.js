@@ -8,7 +8,7 @@ import {
     useHistory
   } from "react-router-dom";
   let currentData=null;
-const Navbar = () => {
+const Navbar = (props) => {
  
     const [userData,setUserData]=useState({});
     const history = useHistory();
@@ -30,7 +30,7 @@ const Navbar = () => {
         }
        
        
-    });
+    },[userData]);
 
     let hasToken=JSON.parse(localStorage.getItem('auth'));
     let protectedViews="";

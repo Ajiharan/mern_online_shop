@@ -86,6 +86,19 @@ router.get('/getUser',(req,res,next)=>{
     });
 });
 
+router.put("/update",async (req,res) =>{
+    console.log("Update",req.body);
+     UserSchema.update({email:req.body.email},{$set:{
+         imageUrl : req.body.imageUrl,
+           
+        }}).then(result=>{
+            res.status(200).json(result);
+        }).catch(err=>{
+            res.status(400).json(err);
+        });       
+});
+
+
 
 
 module.exports=router;
