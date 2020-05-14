@@ -30,11 +30,11 @@ const Profile_password = (props) => {
             .oneOf([yup.ref('password'),null],"password must match")
 
         }),
-        onSubmit:(formData,{setSubmitting})=>{ 
+        onSubmit:(formData,{setSubmitting,resetForm})=>{ 
             let passData={password:formData.oldpassword,newpassword:formData.password}
             document.getElementById("frm1").reset();
-            
-           // props.setData(passData);
+            resetForm({});
+           props.setData(passData);
            
         }
     });

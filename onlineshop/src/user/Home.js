@@ -1,10 +1,11 @@
-import React,{Fragment,useEffect,useState} from 'react';
+import React,{Fragment,useEffect,useState,useRef} from 'react';
 import UserProduct from '../products_components/userProducts'
 import axios from 'axios';
 import CategoryList from '../products_components/products_category_list';
 let tempProductData=[];
 let tempcategoryData=[];
 const Home = (props) => {
+    const intervalRef=useRef();
     const [productData,SetData]=useState([]);
     const[categoryData,setCategoryData]=useState([]);
     useEffect(()=>{
@@ -18,11 +19,13 @@ const Home = (props) => {
 
          getUserProductDatas();
          
-         
+         return()=>{
+            clearInterval(intervalRef.current);
+         }
     },[]);
 
     const getUserProductDatas=()=>{
-        setInterval(()=>{
+        intervalRef.current=setInterval(()=>{
             axios.get("http://localhost:3000/product/view_home").then(res=> {
                 tempProductData=res.data;
              });
