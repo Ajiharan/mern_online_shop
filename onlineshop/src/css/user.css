@@ -189,7 +189,7 @@
     flex-wrap: wrap;  
   }
 
-  #home-category-nav  div{
+  #home-category-nav  #home-category-nav-sub{
     flex-grow: 1;
   }
   #profile-user-container input,#profile-pass-container input{
@@ -222,4 +222,13 @@
   border-radius: 20px;
   font-size:15px;
   font-weight: bolder;
+}
+
+#tog_cat{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    padding: 10px;
+
 }

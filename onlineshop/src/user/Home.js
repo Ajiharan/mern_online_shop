@@ -48,7 +48,7 @@ const Home = (props) => {
     return (
     <div className="container-fluid">
         <div className="row" id="home-category-nav">
-            <div>
+            <div id="home-category-nav-sub">
                 <CategoryList categoryData={categoryData}/>
             </div>
             <div >

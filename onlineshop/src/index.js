@@ -9,7 +9,9 @@ import './css/user.css';
 class Index extends React.Component{
   
   constructor(props){
+    
     super(props);
+      this.timeInterval="";
       this.userhasToken="";
       this.adminhasToken="";
       this.managerhasToken="";
@@ -33,7 +35,7 @@ class Index extends React.Component{
   }
 
   setTime(){
-    setInterval(()=>{
+    this.timeInterval=setInterval(()=>{
     //  console.log("sdsd");
       this.userhasToken=JSON.parse(localStorage.getItem('auth'));
       this.adminhasToken=JSON.parse(localStorage.getItem('auth_admin'));
@@ -56,9 +58,9 @@ class Index extends React.Component{
     this.getAll();
     this.setTime();   
   }
-
-  
-
+  componentWillUnmount(){
+    clearInterval(this.timeInterval);
+  }
 
   render(){
     return(
