@@ -87,7 +87,7 @@ router.get('/getUser',(req,res,next)=>{
 });
 
 router.put("/update",async (req,res) =>{
-    console.log("Update",req.body);
+    // console.log("Update",req.body);
      UserSchema.update({email:req.body.email},{$set:{
          imageUrl : req.body.imageUrl,
            
@@ -98,7 +98,47 @@ router.put("/update",async (req,res) =>{
         });       
 });
 
+router.put("/updateUser",async (req,res) =>{
+    // console.log("Update",req.body);
+     UserSchema.update({email:req.body.email},{$set:{
+         name: req.body.name,       
+        }}).then(result=>{
+            res.status(200).json(result);
+        }).catch(err=>{
+            res.status(400).json(err);
+        });       
+});
 
-
+router.put("/updateUser",async (req,res) =>{
+    // console.log("Update",req.body);
+     UserSchema.update({email:req.body.email},{$set:{
+         name: req.body.name,       
+        }}).then(result=>{
+            res.status(200).json(result);
+        }).catch(err=>{
+            res.status(400).json(err);
+        });       
+});
+router.post("/resetPassword",async (req,res) =>{
+    UserSchema.findOne({email:req.body.email}).then(async result=>{
+        if(result){
+            let validPass=await bcryptjs.compare(req.body.password,result.password);
+            if(validPass){
+                let hash=await bcryptjs.hash(req.body.newpassword,10);
+                UserSchema.update({email:req.body.email},{$set:{
+                    password: hash,       
+                }}).then(result=>{
+                       res.status(200).json(result);
+                 }).catch(err=>{
+                       res.status(400).json(err);
+                });   
+            }else{
+                res.status(400).json("Invalid password");
+            }
+        }else{
+            res.status(400).json("Something Wrong");
+        }
+    })
+});
 
 module.exports=router;

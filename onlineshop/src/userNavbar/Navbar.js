@@ -27,10 +27,20 @@ const Navbar = (props) => {
                     console.log(err);        
                   }); 
             }
+            
         }
        
-       
-    },[userData]);
+        if( props.updateData !==undefined){
+            if(Object.keys(props.updateData).length !==0 ){
+                let temData={...userData,...props.updateData};
+                if(JSON.stringify(temData) !== JSON.stringify(userData)){
+                    console.log("UNavbar data",props.updateData);
+                    setUserData({...userData,...props.updateData});
+                }
+            }
+         
+        }
+    },[userData,props]);
 
     let hasToken=JSON.parse(localStorage.getItem('auth'));
     let protectedViews="";

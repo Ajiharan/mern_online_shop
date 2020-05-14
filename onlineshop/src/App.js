@@ -20,23 +20,30 @@ import ManagerProtected from "./storeManager/StoreManagerProtected";
 import ManagerHome from "./storeManager/Home";
 import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
-
+export const UserUpdateContext=React.createContext();
 function App(props) {
- 
- 
+
+ const [mydata,setData]=useState({});
   let UserNavigation="";
 
-  
+  const UpdateUi=(udata)=>{
+    console.log("Udata",udata)
+    setData(udata);
+  }
   
 
   if(props.uToken){
     UserNavigation=<div className="App">
-    <Navbar/>
+    
+        <Navbar updateData={mydata}/>
+  
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
-      <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
+      <UserUpdateContext.Provider value={UpdateUi} >
+          <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
+      </UserUpdateContext.Provider>
       <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   

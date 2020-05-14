@@ -64,7 +64,7 @@ const Register = (props) => {
             .strict()
             .trim()
             .required("Password is Mandatory")
-            .min(8,"password must be atleast 8 characters"),
+            .min(6,"password must be atleast 6 characters"),
 
 
             conformpassword:yup.string()
