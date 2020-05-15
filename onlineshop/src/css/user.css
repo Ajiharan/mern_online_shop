@@ -232,3 +232,10 @@
     padding: 10px;
 
 }
+
+.myToggle .list-group-item:hover{
+  cursor: pointer;
+  border-bottom: 1px solid orange;
+}
+
+

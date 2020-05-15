@@ -109,16 +109,17 @@ router.put("/updateUser",async (req,res) =>{
         });       
 });
 
-router.put("/updateUser",async (req,res) =>{
-    // console.log("Update",req.body);
-     UserSchema.update({email:req.body.email},{$set:{
-         name: req.body.name,       
-        }}).then(result=>{
-            res.status(200).json(result);
-        }).catch(err=>{
-            res.status(400).json(err);
-        });       
-});
+// router.put("/updateUser",async (req,res) =>{
+//     // console.log("Update",req.body);
+//      UserSchema.update({email:req.body.email},{$set:{
+//          name: req.body.name,       
+//         }}).then(result=>{
+//             res.status(200).json(result);
+//         }).catch(err=>{
+//             res.status(400).json(err);
+//         });       
+// });
+
 router.post("/resetPassword",async (req,res) =>{
     UserSchema.findOne({email:req.body.email}).then(async result=>{
         if(result){

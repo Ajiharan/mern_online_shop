@@ -31,11 +31,17 @@ router.get("/view_home",async(req,res) =>{
 
 router.get('/getAll',async (req,res)=>{
      ProductInfo.aggregate([
-        {"$group" : {_id:{name:"$category"}, count:{$sum:1}}}
+        {"$group" : {_id:{name:"$category"}, count:{$sum:1}}},
      ]).then(result=>{
         res.json(result);
      });           
-})
+});
+
+router.get('/getByCategory/:name',async (req,res)=>{
+    ProductInfo.find({category:req.params.name}).then(result=>{
+       res.json(result);
+    });           
+});
 
 router.put("/update",async (req,res) =>{
     var update = await ProductInfo.update({_id:req.body._id},{$set:{

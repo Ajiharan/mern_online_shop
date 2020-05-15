@@ -4,6 +4,7 @@ import axios from 'axios';
 import CategoryList from '../products_components/products_category_list';
 let tempProductData=[];
 let tempcategoryData=[];
+export const ProductContent=React.createContext();
 const Home = (props) => {
     const intervalRef=useRef();
     const [productData,SetData]=useState([]);
@@ -23,6 +24,13 @@ const Home = (props) => {
             clearInterval(intervalRef.current);
          }
     },[]);
+
+    const ViewProducts=(product_data)=>{
+        clearInterval(intervalRef.current);
+        axios.get(`http://localhost:3000/product/getByCategory/${product_data}`).then(res=>{
+            SetData(res.data);
+        })
+    }
 
     const getUserProductDatas=()=>{
         intervalRef.current=setInterval(()=>{
@@ -46,10 +54,12 @@ const Home = (props) => {
     }
 
     return (
-    <div className="container-fluid">
+    <div className="container">
         <div className="row" id="home-category-nav">
             <div id="home-category-nav-sub">
-                <CategoryList categoryData={categoryData}/>
+                <ProductContent.Provider value={ViewProducts}>
+                     <CategoryList categoryData={categoryData}/>
+                </ProductContent.Provider>            
             </div>
             <div >
                  <UserProduct ProductData={productData}/>
