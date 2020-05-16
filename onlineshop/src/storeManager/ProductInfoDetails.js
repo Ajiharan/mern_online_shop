@@ -10,9 +10,10 @@ class InfoDetailsProduct extends React.Component{
             <table className="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Product Name</th>
-                    <th>Category Type</th>
-                    <th>Product Price</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Count</th>
                     <th>Image</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -28,6 +29,7 @@ class InfoDetailsProduct extends React.Component{
                                     <td>{e.name}</td>
                                     <td>{e.category}</td>
                                     <td>{e.price}</td>
+                                    <td>{e.count}</td>
                                     <td><img style={{height:"35px",width:"50px"}} src={e.imageUrl} alt="alt"/></td>
                                     <td><button
                                         onClick ={event =>{

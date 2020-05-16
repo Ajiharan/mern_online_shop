@@ -10,7 +10,7 @@ class ProductInfoForm extends React.Component {
             name: "",
             category: "",
             price: "",
-            image: null,
+            count: "",
             imageUrl: '',
             progress: 0,
             isEdit: false
@@ -66,13 +66,14 @@ class ProductInfoForm extends React.Component {
 
 
     infoSubmit =event =>{
-        event.preventDefault();
+
         if(!this.state.isEdit){
             let data = {
                 isEdit: this.state.isEdit,
                 name: this.state.name,
                 category: this.state.category,
                 price: this.state.price,
+                count :this.state.count,
                 imageUrl: this.state.url
             }
 
@@ -80,12 +81,14 @@ class ProductInfoForm extends React.Component {
         }
 
         else{
+            event.preventDefault()
             let data ={
                 isEdit: this.state.isEdit,
                 _id : this.state._id,
                 name : this.state.name,
                 category : this.state.category,
                 price : this.state.price,
+                count :this.state.count,
                 imageUrl: this.state.url
             }
             this.props.myData(data);
@@ -101,6 +104,7 @@ class ProductInfoForm extends React.Component {
                 name : props.setForm.name,
                 category : props.setForm.category,
                 price : props.setForm.price,
+                count :props.setForm.count,
                 imageUrl: props.setForm.url
             })
         }
@@ -112,7 +116,7 @@ class ProductInfoForm extends React.Component {
 
                 <label htmlFor="Name">Product Image:</label>
                 <br/>
-                <img src={this.state.url || 'http://via.placeholder.com/200x200'} id="img-fire" alt="Uploaded images" height="150" width="150"/>
+                <img src={this.state.imageUrl || 'http://via.placeholder.com/200x200'} id="img-fire" alt="Uploaded images" height="150" width="150"/>
                 <br/>
                 <progress value={this.state.progress} max="100"/>
                 <br/>
@@ -147,6 +151,11 @@ class ProductInfoForm extends React.Component {
                                onChange={this.infoChange}
                                name = "price"
                                value = {this.state.price}/><br/>
+
+                        <input type="text" className="form-control"
+                               onChange={this.infoChange}
+                               name = "count"
+                               value = {this.state.count}/><br/>
 
                     <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button>
 

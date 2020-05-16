@@ -10,6 +10,7 @@ router.post("/add",async(req,res) =>{
         name : req.body.name,
         category: req.body.category,
         price:req.body.price,
+        count:req.body.count,
         imageUrl:req.body.imageUrl
     });
 
@@ -48,6 +49,7 @@ router.put("/update",async (req,res) =>{
             name : req.body.name,
             category: req.body.category,
             price:req.body.price,
+            count:req.body.count,
             imageUrl:req.body.imageUrl
         }});
 

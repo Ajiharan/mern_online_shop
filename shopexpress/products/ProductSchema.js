@@ -15,6 +15,11 @@ const ProductSchema=mongoose.Schema({
       required : true
 
     },
+    count:{
+        type :Number,
+        required : true
+
+    },
     imageUrl:{
         type:String,
         required:true
