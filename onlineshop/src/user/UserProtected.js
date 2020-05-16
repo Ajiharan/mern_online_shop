@@ -25,4 +25,4 @@ const UserProtected = ({component,...rest}) => {
     );
 };
 
-export default UserProtected;
+export default React.memo(UserProtected);

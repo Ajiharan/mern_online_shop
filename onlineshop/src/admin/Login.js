@@ -91,14 +91,14 @@ const Login = (props) => {
                              <input {...formik.getFieldProps('email')}  value={formik.values.email} id="email" className="form-control" type="email" name="email"/>
                          </div>
                          {
-                             (formik.errors.email && formik.touched.email)?(<h6 className={"text-danger"}><i class="fas fa-exclamation"></i>{formik.errors.email} </h6>):(null)
+                             (formik.errors.email && formik.touched.email)?(<h6 className={"text-danger"}><i className="fas fa-exclamation"></i>{formik.errors.email} </h6>):(null)
                          }
                          <div className="form-group">
                              <label htmlFor="password">Password</label>
                              <input {...formik.getFieldProps('password')}  value={formik.values.password} className="form-control" id="password" type="password" name="password"/>
                          </div>
                          {
-                             (formik.errors.password && formik.touched.password)?(<h6 className={"text-danger"}><i class="fas fa-exclamation"></i>{formik.errors.password} </h6>):(null)
+                             (formik.errors.password && formik.touched.password)?(<h6 className={"text-danger"}><i className="fas fa-exclamation"></i>{formik.errors.password} </h6>):(null)
                          }
                                       
                              <div id="button-group" className="row">   

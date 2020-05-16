@@ -19,13 +19,13 @@ router.post("/add",async(req,res) =>{
 })
 
 router.get("/view",async(req,res) =>{
-    var findData = await ProductInfo.find();
+    var findData = await ProductInfo.find().limit(15);
     res.json(findData);
 })
 
 
 router.get("/view_home",async(req,res) =>{
-    var findData = await ProductInfo.find().limit(12);
+    var findData = await ProductInfo.find();
     res.json(findData);
 })
 

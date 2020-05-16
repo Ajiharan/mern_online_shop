@@ -26,4 +26,4 @@ const policy = () => {
     );
 };
 
-export default policy;
+export default React.memo(policy);

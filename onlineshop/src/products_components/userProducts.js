@@ -19,6 +19,7 @@ const UserProducts = (props) => {
                             <i className="far fa-heart" style={{cursor:'pointer'}}></i>
                             <img style={{width:'200px',height:'200px'}} className='card-img-top' src={e.imageUrl}/>
                             <div className="card-body">
+                                <p>{e.count} available</p>
                              <h5 className="card-title">{e.name} ${e.price}</h5>
 
                                 <button className="btn btn-primary" onClick={CheckAuthentication}>Add to cart</button>

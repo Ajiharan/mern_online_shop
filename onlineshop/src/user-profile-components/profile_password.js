@@ -72,4 +72,4 @@ const Profile_password = (props) => {
     );
 };
 
-export default Profile_password;
+export default React.memo(Profile_password);

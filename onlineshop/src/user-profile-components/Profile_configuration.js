@@ -127,4 +127,4 @@ const Profile_configuration = (props) => {
     );
 };
 
-export default Profile_configuration;
+export default React.memo(Profile_configuration);
