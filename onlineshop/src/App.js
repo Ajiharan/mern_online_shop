@@ -42,10 +42,12 @@ function App(props) {
       <Route exact path="/" component={Home}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
+      <UserProtected exact path="/user/wishlist" component={Wishlist}/> 
+      
       <UserUpdateContext.Provider value={UpdateUi} >
        <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
       </UserUpdateContext.Provider>
-      <UserProtected exact path="/user/wishlist" component={Wishlist}/> 
+      
       <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   
