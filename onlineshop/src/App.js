@@ -20,6 +20,7 @@ import ManagerProtected from "./storeManager/StoreManagerProtected";
 import ManagerHome from "./storeManager/Home";
 import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
+import Wishlist from "./wishlist/home";
 export const UserUpdateContext=React.createContext();
 function App(props) {
 
@@ -42,8 +43,9 @@ function App(props) {
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
       <UserUpdateContext.Provider value={UpdateUi} >
-          <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
+       <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
       </UserUpdateContext.Provider>
+      <UserProtected exact path="/user/wishlist" component={Wishlist}/> 
       <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   
