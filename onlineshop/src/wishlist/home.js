@@ -18,21 +18,28 @@ const Home = (props) => {
     },[]);
 
     return (
-        <div className="container">
-            <h2 className="text-dark">WishList</h2>
-            {
-                wishlist.map((e,i)=>(
-                     <div className="card my-card" key={i}>
-                        
-                        <img style={{width:'200px',height:'200px'}} className='card-img-top' src={e.imageUrl}/>
-                        <div className="card-body">
-                             <p>{e.count} available</p>
-                             <h5 className="card-title">{e.name} ${e.price}</h5>
-                            <button className="btn btn-primary">Add to cart</button>
-                         </div>
-                     </div>
-                 ))
-            }
+        <div className="container mt-4 pt-1 wishlist-container">  
+            <h4 className="text-center bg-danger text-light" style={{opacity:'0.8'}}>My Wishlist</h4>
+            <div className="store-list-container mt-4">
+                <div className="store-list">     
+                    {
+                        wishlist.map((e,i)=>(
+                            <div className="row mt-4" key={i}>
+                                <div className="col-md-6 col-sm-12 col-xs-12">
+                                        <img  className='card-img-top' src={e.imageUrl}/>               
+            
+                                </div>
+                                <div className="col-md-6 col-sm-12 col-xs-12" style={{marginTop:'25px'}}>
+                                    <p>{e.count} available</p>
+                                    <h5 className="card-title">{e.name} ${e.price}</h5>
+                                    <button className="btn btn-primary">Add to cart</button>
+                                </div>
+                                
+                            </div>                   
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     );
 };
