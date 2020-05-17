@@ -1,13 +1,24 @@
 import React,{useState} from 'react';
 import {useHistory} from "react-router-dom";
+import Axios from 'axios';
 const UserProducts = (props) => {
     const history = useHistory();
     const CheckAuthentication=()=>{
         let hasToken=JSON.parse(localStorage.getItem('auth'));
         if(!hasToken){
-            history.push('/user/Login');
-            
+            history.push('/user/Login');     
         }
+    }
+
+    const AddWishList=(e)=>{
+        Axios.post("http://localhost:3000/wishlist/add",{uid:props.UsersData._id,pid:e._id}).then(res=>{
+            console.log(res.data);
+        }).catch(err=>{
+            console.log(err);
+        })
+
+        console.log(props.UsersData);
+
     }
 
     return (
@@ -16,7 +27,7 @@ const UserProducts = (props) => {
                 {
                     props.ProductData.map((e,i)=>(
                         <div className="card my-card" key={i}>
-                            <i className="far fa-heart" style={{cursor:'pointer'}}></i>
+                            <i className="far fa-heart" onClick={()=>{AddWishList(e)}} style={{cursor:'pointer'}}></i>
                             <img style={{width:'200px',height:'200px'}} className='card-img-top' src={e.imageUrl}/>
                             <div className="card-body">
                                 <p>{e.count} available</p>

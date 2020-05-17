@@ -10,6 +10,7 @@ const Home = (props) => {
     const [productData,SetData]=useState([]);
     const[categoryData,setCategoryData]=useState([]);
     useEffect(()=>{
+        //console.log("Pudata",props.Udata);
         axios.get("http://localhost:3000/product/view").then(res=> {
            
            SetData(res.data);
@@ -64,7 +65,7 @@ const Home = (props) => {
                 </ProductContent.Provider>            
             </div>
             <div >
-                 <UserProduct ProductData={productData}/>
+                 <UserProduct UsersData={props.Udata} ProductData={productData}/>
              </div>
         </div>
     </div>    

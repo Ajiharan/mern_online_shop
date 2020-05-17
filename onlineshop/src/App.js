@@ -50,7 +50,7 @@ function App(props) {
         <Navbar updateData={mydata}/>
   
     <Switch>
-      <Route exact path="/" component={Home}/>
+      <Route exact path="/" component={()=><Home Udata={userData}/>}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
       <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/> 
