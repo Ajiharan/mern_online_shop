@@ -11,6 +11,7 @@ const Home = (props) => {
     const[categoryData,setCategoryData]=useState([]);
     useEffect(()=>{
         axios.get("http://localhost:3000/product/view").then(res=> {
+           
            SetData(res.data);
         })
 
@@ -35,6 +36,7 @@ const Home = (props) => {
     const getUserProductDatas=()=>{
         intervalRef.current=setInterval(()=>{
             axios.get("http://localhost:3000/product/view_home").then(res=> {
+                console.log(res.data);
                 tempProductData=res.data;
              });
      

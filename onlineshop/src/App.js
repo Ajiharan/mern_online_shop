@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useRef} from 'react';
 import Register from './user/Register';
 import Login from './user/Login';
 import Home from './user/Home';
@@ -21,11 +21,22 @@ import ManagerHome from "./storeManager/Home";
 import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
 import Wishlist from "./wishlist/home";
+import axios from 'axios';
 export const UserUpdateContext=React.createContext();
 function App(props) {
 
  const [mydata,setData]=useState({});
+ const[userData,setUserData]=useState({});
+  let myref=useRef({});
   let UserNavigation="";
+
+  useEffect(()=>{
+     axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
+       myref.current=res.data;
+       setUserData(res.data);
+       console.log("App Data",res.data);
+     });
+  },[]);
 
   const UpdateUi=(udata)=>{
     console.log("Udata",udata)
@@ -42,7 +53,7 @@ function App(props) {
       <Route exact path="/" component={Home}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
-      <UserProtected exact path="/user/wishlist" component={Wishlist}/> 
+      <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/> 
       
       <UserUpdateContext.Provider value={UpdateUi} >
        <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    

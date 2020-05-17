@@ -1,8 +1,9 @@
 const router=require('express').Router();
-const WishSchema=require('./ListSchema');
+const ListSchema=require('./ListSchema');
+const ProductSchema=require('../products/ProductSchema');
 
 router.post('/add',async(req,res)=>{
-    const wishdata=new WishSchema({
+   let wishdata=new ListSchema({
         uid:req.body.uid,
         pid:req.body.pid
     });
@@ -13,5 +14,22 @@ router.post('/add',async(req,res)=>{
     })
 
 });
+
+
+router.get('/view/:id',async(req,res)=>{
+    let tempData=[];
+    ListSchema.find({uid:req.params.id}).then(async result=>{
+
+         tempData= result.map( async e=>{       
+            return await ProductSchema.findOne({_id:e.pid});
+        }); 
+        let myresult=await Promise.all(tempData);          
+        console.log(myresult);
+        return res.status(200).json(myresult);
+    }).catch(err=>{
+        res.status(400).json(err);
+    });
+ 
+ });
 
 module.exports=router;

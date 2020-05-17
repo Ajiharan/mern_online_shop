@@ -12,4 +12,4 @@ const ListSchema=mongoose.Schema({
 
 });
 
-module.export=mongoose.model("ListSchema",ListSchema);
+module.exports=mongoose.model("ListSchema",ListSchema);
