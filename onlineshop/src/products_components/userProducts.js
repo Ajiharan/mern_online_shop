@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {useHistory} from "react-router-dom";
 import Axios from 'axios';
+import { toast } from 'react-toastify';
 const UserProducts = (props) => {
     const history = useHistory();
     const CheckAuthentication=()=>{
@@ -13,6 +14,7 @@ const UserProducts = (props) => {
     const AddWishList=(e)=>{
         Axios.post("http://localhost:3000/wishlist/add",{uid:props.UsersData._id,pid:e._id}).then(res=>{
             console.log(res.data);
+            toast.success("Added to wishlist Sucessfully");
         }).catch(err=>{
             console.log(err);
         })
