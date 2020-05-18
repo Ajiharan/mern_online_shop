@@ -36,7 +36,7 @@ function App(props) {
        setUserData(res.data);
        console.log("App Data",res.data);
      });
-  },[]);
+  },[props]);
 
   const UpdateUi=(udata)=>{
     console.log("Udata",udata)
@@ -47,7 +47,7 @@ function App(props) {
   if(props.uToken){
     UserNavigation=<div className="App">
     
-        <Navbar updateData={mydata}/>
+        <Navbar firstData={userData} updateData={mydata}/>
   
     <Switch>
       <Route exact path="/" component={()=><Home Udata={userData}/>}/>
@@ -110,4 +110,4 @@ function App(props) {
   );
 }
 
-export default React.memo(App);
+export default App;

@@ -17,7 +17,7 @@ router.post('/add',async(req,res)=>{
 
 router.delete('/delete',(req,res)=>{
     ListSchema.deleteOne({pid:req.query.pid,uid:req.query.uid}).then(result=>{
-        res,status(200).json(result);
+        res.status(200).json(result);
     }).catch(err=>{
         res.status(400).json(err);
     })

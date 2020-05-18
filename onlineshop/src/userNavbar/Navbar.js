@@ -14,9 +14,10 @@ const Navbar = (props) => {
     const history = useHistory();
 
     useEffect(()=>{
+        console.log("FirstData",props.firstData);
         let hasToken=JSON.parse(localStorage.getItem('auth'));
         
-        if(JSON.stringify(currentData) !== JSON.stringify(userData)){
+        if((JSON.stringify(currentData) !== JSON.stringify(userData)) || (JSON.stringify(props.firstData) !== JSON.stringify(userData))){
             if(hasToken){
                 axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
                     console.log(res.data);   
@@ -40,7 +41,7 @@ const Navbar = (props) => {
             }
          
         }
-    },[userData,props]);
+    },[props]);
 
     let hasToken=JSON.parse(localStorage.getItem('auth'));
     let protectedViews="";
