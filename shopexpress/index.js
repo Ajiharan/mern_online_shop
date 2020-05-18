@@ -31,6 +31,7 @@ app.use('/admin/manager',storeManagerRouter);
 app.use('/admin/mail',mailRouter);
 app.use('/product',productRouter);
 app.use('/wishlist',wishlistRouter);
+app.use('/cart',CartRouter);
 
 app.listen(3000,(err)=>{
     if(err)
