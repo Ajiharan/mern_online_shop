@@ -58,8 +58,8 @@ const Navbar = (props) => {
             <div className="protect navbar-nav">
                  <div className="nav-item display-4" style={{margin:'5px',fontSize:'20px'}}>
                   <a href="#" className="text-light nav-link" > <i className="fas fa-shopping-cart" style={{position:'relative',marginRight:'20px'}}>
-                      <span className="text-light bg-warning text-center" style={{width:'18px',borderRadius:'100px',
-                      padding:'1px',position:'absolute',marginTop:'-10px'}}>0</span> </i></a> 
+                      <span className="text-dark bg-warning text-center" style={{width:'18px',borderRadius:'100px',
+                      padding:'1px',position:'absolute',marginTop:'-10px',opacity:'0.8'}}>0</span> </i></a> 
                 </div>
                 <div className="nav-item" id="profile">
                 <div className="dropdown">
