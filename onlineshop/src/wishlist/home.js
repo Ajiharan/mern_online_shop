@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useRef} from 'react';
+import React,{useEffect,useState,useRef,Fragment} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -32,7 +32,9 @@ const Home = (props) => {
     }
 
     return (
-        <div className="container mt-4 pt-1 wishlist-container">  
+        <div className="container mt-4 pt-1 wishlist-container"> 
+        {   wishlist.length > 0?(
+            <Fragment>
             <h4 className="text-center bg-danger text-light" style={{opacity:'0.8'}}>My Wishlist</h4>
             <div className="store-list-container mt-4">
                 <div className="store-list">     
@@ -55,7 +57,10 @@ const Home = (props) => {
                     }
                 </div>
             </div>
+            </Fragment>):(<h4 className="text-center bg-danger text-light" style={{opacity:'0.8'}}>No items are Added in list</h4>)
+            }
         </div>
+        
     );
 };
 

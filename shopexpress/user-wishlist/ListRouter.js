@@ -3,16 +3,25 @@ const ListSchema=require('./ListSchema');
 const ProductSchema=require('../products/ProductSchema');
 
 router.post('/add',async(req,res)=>{
-   let wishdata=new ListSchema({
-        uid:req.body.uid,
-        pid:req.body.pid
-    });
-    wishdata.save().then(result=>{
-        res.status(200).json(result);
-    }).catch(err=>{
-        res.status(400).json(err);
-    })
 
+    let isExists=await ListSchema.findOne({uid:req.body.uid,
+        pid:req.body.pid});
+    
+    if(isExists){
+        res.status(400).json("Already added in wishlist");
+    }else{
+        let wishdata=new ListSchema({
+            uid:req.body.uid,
+            pid:req.body.pid
+        });
+        wishdata.save().then(result=>{
+            res.status(200).json(result);
+        }).catch(err=>{
+            res.status(400).json(err);
+        })
+    
+    }
+   
 });
 
 router.delete('/delete',(req,res)=>{

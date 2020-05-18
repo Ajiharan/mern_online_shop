@@ -17,10 +17,9 @@ const UserProducts = (props) => {
             toast.success("Added to wishlist Sucessfully");
         }).catch(err=>{
             console.log(err);
-        })
-
+            toast.error(err.response.data);
+        });
         console.log(props.UsersData);
-
     }
 
     return (
