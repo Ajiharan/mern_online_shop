@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useReducer} from 'react';
 import axios from 'axios';
 import {
     BrowserRouter as Router,
@@ -8,13 +8,16 @@ import {
     useHistory
   } from "react-router-dom";
   let currentData=null;
+  
 const Navbar = (props) => {
  
     const [userData,setUserData]=useState({});
+    const[CartCount,setCartCount]=useState(0);
     const history = useHistory();
 
     useEffect(()=>{
-        console.log("FirstData",props.firstData);
+        console.log("FirstData..",props.firstData);
+        
         let hasToken=JSON.parse(localStorage.getItem('auth'));
         
         if((JSON.stringify(currentData) !== JSON.stringify(userData)) || (JSON.stringify(props.firstData) !== JSON.stringify(userData))){
@@ -23,7 +26,7 @@ const Navbar = (props) => {
                     console.log(res.data);   
                     currentData=res.data;
                    setUserData(res.data);
-                        
+                   setCartCount(props.firstData.TotalCount); 
                   }).catch(err=>{
                     console.log(err);        
                   }); 
@@ -59,7 +62,7 @@ const Navbar = (props) => {
                  <div className="nav-item display-4" style={{margin:'5px',fontSize:'20px'}}>
                   <Link to="/user/cart" className="text-light nav-link" > <i className="fas fa-shopping-cart" style={{position:'relative',marginRight:'20px'}}>
                       <span className="text-dark bg-warning text-center" style={{width:'18px',borderRadius:'100px',
-                      padding:'1px',position:'absolute',marginTop:'-10px',opacity:'0.8'}}>0</span> </i></Link> 
+                      padding:'1px',position:'absolute',marginTop:'-10px',opacity:'0.8'}}>{CartCount}</span> </i></Link> 
                 </div>
                 <div className="nav-item" id="profile">
                 <div className="dropdown">

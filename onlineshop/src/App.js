@@ -28,15 +28,26 @@ function App(props) {
 
  const [mydata,setData]=useState({});
  const[userData,setUserData]=useState({});
+
   let myref=useRef({});
   let UserNavigation="";
 
   useEffect(()=>{
      axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
-       myref.current=res.data;
-       setUserData(res.data);
-       console.log("App Data",res.data);
+      axios.get(`http://localhost:3000/cart/total/${res.data._id}`).then(Count_res=>{       
+         //console.log("Count Data",Count_res.data.length);
+         myref.current=res.data;
+         let tempCurrent=0;
+         if(Count_res.data.length > 0){
+           console.log("Count_res.length",Count_res.data.length);
+          tempCurrent=Count_res.data[0].TotalCount;
+         }
+         setUserData({...res.data,TotalCount:tempCurrent});
+         console.log("App Data",res.data);
+       });
+      
      });
+   
   },[props]);
 
   const UpdateUi=(udata)=>{

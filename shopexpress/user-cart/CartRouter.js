@@ -17,7 +17,9 @@ const ProductSchema=require('../products/ProductSchema');
 // })
 
 router.get('/total/:id',(req,res)=>{
-    CartSchema.aggregate([
+    CartSchema.aggregate([{$match:{
+        uid:req.params.id
+        }},
         {
             $group:{
                 _id:null,
