@@ -2,6 +2,7 @@ import React,{Fragment,useState,useEffect,useRef} from 'react';
 import axios from 'axios';
 const CartHome = (props) => {
     const [cardlist,setCart]=useState([]);
+    const[tempCount,setCount]=useState(1);
     const myref=useRef([]);
 
     useEffect(()=>{
@@ -19,6 +20,18 @@ const CartHome = (props) => {
             })
         }   
     }
+    const DeleteFromcart=(id)=>{
+        alert(id);
+    }
+    const UpdateCount=(id)=>{
+           
+        alert(tempCount);
+    }
+
+    const InfoChange=(event)=>{
+        setCount(event.target.value);
+    }
+
     return (
         <div className="container mt-4 pt-1 wishlist-container"> 
         { cardlist.length > 0?(
@@ -37,13 +50,13 @@ const CartHome = (props) => {
                                     <p>{e.cartDetails[0].count} available</p>
                                     <h5 className="card-title">{e.cartDetails[0].name} ${e.cartDetails[0].price}</h5>
                                    
-                                    <button  className="btn btn-danger mt-4">Remove Item</button>
-                                    <form>
+                                    <button onClick={()=>{DeleteFromcart(e._id)}} className="btn btn-danger mt-4">Remove Item</button>
+                                    
                                         <div className="form-group mt-4">
-                                            <input value={e.count} type="number" className="form-control"/>
-                                            <button  className="btn btn-success mt-4">Update</button>
+                                            <input defaultValue={e.count} type="number" onChange={InfoChange} className="form-control"/>
+                                            <button onClick={()=>{UpdateCount(e._id)}} className="btn btn-success mt-4">Update</button>
                                         </div>                                     
-                                    </form>
+                                    
                                 </div>
                                 
                             </div>                   
