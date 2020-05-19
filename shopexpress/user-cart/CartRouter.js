@@ -1,32 +1,60 @@
 const router=require('express').Router();
 const CartSchema=require('./CartSchema');
+const ProductSchema=require('../products/ProductSchema');
 
+// router.get('/view/:id',async (req,res)=>{
+//     CartSchema.find({uid:req.params.id}).then(async result=>{
+//         tempData= result.map( async e=>{       
+//            let ProductData= await ProductSchema.findOne({_id:e.pid})     
+//             return {... await ProductData,cartcount:e.count};      
+//         }); 
+//         let myresult=await Promise.all(tempData);          
+//         console.log(myresult);
+//         res.status(200).json(myresult);
+//     }).catch(err=>{
+//         res.status(400).json(err);
+//     })
+// })
+router.get('/view/:id',async (req,res)=>{
+  CartSchema.aggregate([{$match:{
+      uid:req.params.id
+  }},
+    { "$lookup":
+        {
+          from:ProductSchema.collection.name,
+          localField: "pid",
+          foreignField: "_id",
+            as: "cartDetails"
+        }
+      }
 
-
-router.get('/view/:id',(req,res)=>{
-    CartSchema.find({uid:req.params.id}).then(result=>{
-        res.status(200).json(result)
-    }).catch(err=>{
-        res.status(400).json(err);
-    })
+  ]).then(myresult=>{
+    res.status(200).json(myresult);
+  }).catch(err=>{
+    res.status(400).json(err);
+  })
 })
 
 
 router.post('/add',async (req,res)=>{
-    let postData=await new CartSchema({
-        uid:req.body.uid,
-        pid:req.body.pid,
-        count:req.body.count,
-        price:req.body.price,
-        imageUrl:req.body.imageUrl
-    });
+    
+    let isExists=await CartSchema.findOne({ uid:req.body.uid,pid:req.body.pid});
 
-    postData.save().then(result=>{
-        res.status(200).json(result);
-    }).catch(err=>{
-        res.status(400).json(err);
-    })
-
+    if(isExists){
+        res.status(400).json("Already added");
+    }else{
+        let postData=await new CartSchema({
+            uid:req.body.uid,
+            pid:req.body.pid          
+        });
+    
+        postData.save().then(result=>{
+            res.status(200).json(result);
+        }).catch(err=>{
+            res.status(400).json(err);
+        })
+    }
+  
 });
 
 
@@ -40,8 +68,7 @@ router.delete('/delete/:id',(req,res)=>{
 
 router.put('/update',(req,res)=>{
     CartSchema.updateOne({_id:req.body.id},{$set:{
-        count:req.body.count,
-        price:req.body.price
+        count:req.body.count     
     }}).then(result=>{
         res.status(200).json(result);
     }).catch(err=>{

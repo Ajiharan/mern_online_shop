@@ -13,6 +13,7 @@ import UserDashboard from './user/Dashboard';
 import AdminNavbar from './adminNavbar/AdminNavbar';
 import AdminHome from './admin/Home';
 import AdminLogin from './admin/Login';
+import CartHome from './cart-components/CartHome';
 import Categories from "./admin/Categories";
 import AdminMail from "./admin/MailActivity";
 import StoreManagerNavbar from "./managerNavbar/Navbar";
@@ -54,7 +55,7 @@ function App(props) {
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
       <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/> 
-      
+      <UserProtected exact path="/user/cart" component={()=><CartHome CartData={userData}/>}/>
       <UserUpdateContext.Provider value={UpdateUi} >
        <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
       </UserUpdateContext.Provider>

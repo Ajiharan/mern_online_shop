@@ -6,20 +6,12 @@ const CartSchema=mongoose.Schema({
         required:true
     },
     pid:{
-        type:String,
+        type:mongoose.Schema.ObjectId,
         required:true
     },
     count:{
         type:Number,
-        required:true
-    },
-    price:{
-        type:Number,
-        required:true
-    },
-    imageUrl:{
-        type:String,
-        required:true
+        default:1
     }
 
 });

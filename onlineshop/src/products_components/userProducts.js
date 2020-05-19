@@ -4,10 +4,20 @@ import Axios from 'axios';
 import { toast } from 'react-toastify';
 const UserProducts = (props) => {
     const history = useHistory();
-    const CheckAuthentication=()=>{
+
+    const CheckAuthentication=(e)=>{
         let hasToken=JSON.parse(localStorage.getItem('auth'));
         if(!hasToken){
             history.push('/user/Login');     
+        }else{
+            Axios.post('http://localhost:3000/cart/add',{uid:props.UsersData._id,pid:e._id}).then(res=>{
+                console.log(res.data);
+                toast.success("Added to cart Sucessfully");
+            }).catch(err=>{
+                console.log(err);
+                toast.error(err.response.data);
+            });
+           // console.log(props.UsersData._id);
         }
     }
 
@@ -33,8 +43,7 @@ const UserProducts = (props) => {
                             <div className="card-body">
                                 <p>{e.count} available</p>
                              <h5 className="card-title">{e.name} ${e.price}</h5>
-
-                                <button className="btn btn-primary" onClick={CheckAuthentication}>Add to cart</button>
+                                <button className="btn btn-primary" onClick={()=>{CheckAuthentication(e)}}>Add to cart</button>
                             </div>
                         </div>
                     ))

@@ -53,7 +53,7 @@ const Home = (props) => {
               if((JSON.stringify(categoryData) !==JSON.stringify(tempcategoryData))){
                 setCategoryData(tempcategoryData);
               }
-        },30000)
+        },300000)
 
     }
 
