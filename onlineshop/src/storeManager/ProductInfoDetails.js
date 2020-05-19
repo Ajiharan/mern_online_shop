@@ -15,8 +15,7 @@ class InfoDetailsProduct extends React.Component{
                     <th>Price</th>
                     <th>Count</th>
                     <th>Image</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -30,17 +29,12 @@ class InfoDetailsProduct extends React.Component{
                                     <td>{e.category}</td>
                                     <td>{e.price}</td>
                                     <td>{e.count}</td>
-                                    <td><img style={{height:"35px",width:"50px"}} src={e.imageUrl} alt="alt"/></td>
-                                    <td><button
-                                        onClick ={event =>{
-                                            this.props.setData(e)
-                                        }}
-                                    >Edit</button></td>
+                                    <td><img style={{height:"35px",width:"50px"}} src={e.imageUrl} alt="No image"/></td>
                                     <td><button
                                         onClick ={event =>{
                                             this.props.del(e)
                                         }}
-                                    >Delete</button></td>
+                                    >Remove</button></td>
                                 </tr>
                             )
 

@@ -2,6 +2,8 @@ import React from 'react';
 import ProductInfoDetails from './ProductInfoDetails';
 import ProductInfoForm from "./ProductInfoForm";
 import axios from 'axios';
+import {toast} from "react-toastify";
+import EditProduct from "./EditProduct";
 
 class Products extends React.Component{
 
@@ -17,12 +19,15 @@ class Products extends React.Component{
     create = data =>{
         if(!data.isEdit){
             axios.post("http://localhost:3000/product/add",data).then(res=>{
+                toast.success(`${data.name} is added sucessfully!!!`)
                 this.getAll();
             })
+
         }
 
         else{
             axios.put("http://localhost:3000/product/update",data).then(res =>{
+                toast.success(`${data.name} is updated sucessfully!!!`)
                 this.getAll();
             })
         }
@@ -67,9 +72,11 @@ class Products extends React.Component{
         var option = window.confirm(`Are you sure want to delete ${data.name}`)
         if(option){
             axios.delete(`http://localhost:3000/product/del/${data._id}`).then(res =>{
-                console.log(res);
+                toast.success(`${data.name} is deleted sucessfully!!!`)
                 this.getAll();
+
             })
+
         }
     }
 

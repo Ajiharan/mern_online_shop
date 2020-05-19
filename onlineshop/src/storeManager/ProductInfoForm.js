@@ -11,9 +11,8 @@ class ProductInfoForm extends React.Component {
             category: "",
             price: "",
             count: "",
-            imageUrl: '',
-            progress: 0,
-            isEdit: false
+            imageUrl: "",
+            progress: 0
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,8 +30,8 @@ class ProductInfoForm extends React.Component {
     handleChange = e => {
         if (e.target.files[0]) {
             let output=document.querySelector("#img-fire");
-           // console.log("Target",URL.createObjectURL(e.target.files[0]));
-            
+            // console.log("Target",URL.createObjectURL(e.target.files[0]));
+
             output.src=URL.createObjectURL(e.target.files[0]);
             output.onload=function(){
                 URL.revokeObjectURL(output.src);
@@ -67,9 +66,7 @@ class ProductInfoForm extends React.Component {
 
     infoSubmit =event =>{
         event.preventDefault();
-        if(!this.state.isEdit){
             let data = {
-                isEdit: this.state.isEdit,
                 name: this.state.name,
                 category: this.state.category,
                 price: this.state.price,
@@ -78,37 +75,27 @@ class ProductInfoForm extends React.Component {
             }
 
             this.props.myData(data);
-        }
-
-        else{
-            event.preventDefault()
-            let data ={
-                isEdit: this.state.isEdit,
-                _id : this.state._id,
-                name : this.state.name,
-                category : this.state.category,
-                price : this.state.price,
-                count :this.state.count,
-                imageUrl: this.state.url
-            }
-            this.props.myData(data);
-        }
 
     }
 
-    componentWillReceiveProps(props) {
-        if(props.setForm._id != null) {
-            this.setState({
-                isEdit: true,
-                _id:props.setForm._id,
-                name : props.setForm.name,
-                category : props.setForm.category,
-                price : props.setForm.price,
-                count :props.setForm.count,
-                imageUrl: props.setForm.url
-            })
-        }
+    Clear = () =>{
+        document.getElementById('img').value = ''
+        // document.getElementById('name').value = ''
+        // document.getElementById('category').value = ''
+        // document.getElementById('price').value = ''
+        // document.getElementById('count').value = ''
+
+        this.setState({
+            name: "",
+            category:"",
+            price: "",
+            count : "",
+            imageUrl: "",
+            progress : 0
+        })
+
     }
+
 
     render() {
         return (
@@ -120,22 +107,22 @@ class ProductInfoForm extends React.Component {
                 <br/>
                 <progress value={this.state.progress} max="100"/>
                 <br/>
-                <input type="file" onChange={this.handleChange}/>
+                <input type="file" id ="img" onChange={this.handleChange}/>
                 <button className="btn" onClick={this.handleUpload}>Upload</button>
                 <br/><br/>
 
-                <form  onSubmit={this.infoSubmit} autoComplete="off">
+                <form id="myForm" onSubmit={this.infoSubmit} autoComplete="off">
                     <div className="form-group">
                         <label htmlFor="Name">Product Name:</label>
-                        <input type="text" className="form-control"
+                        <input type="text" id="name" className="form-control"
                                onChange={this.infoChange}
                                name = "name"
                                value = {this.state.name}/>
-                    <br/>
+                        <br/>
                         <label htmlFor="Name">Category Type:</label>
 
                         <div>
-                            <select onChange={this.infoChange} name="category" value={this.state.category}>
+                            <select onChange={this.infoChange} id="category" name="category" value={this.state.category}>
                                 <option>Select Category</option>
                                 {
                                     this.props.getCategories.map((e) => <option key={e._id} value={e.name}>{e.name}</option>)
@@ -147,17 +134,19 @@ class ProductInfoForm extends React.Component {
 
                         <label htmlFor="Name">Product Price:</label>
 
-                        <input type="text" className="form-control"
+                        <input type="text" id="price" className="form-control"
                                onChange={this.infoChange}
                                name = "price"
                                value = {this.state.price}/><br/>
 
-                        <input type="text" className="form-control"
+                        <label htmlFor="Name">Product Count:</label>
+
+                        <input type="text" id="count" className="form-control"
                                onChange={this.infoChange}
                                name = "count"
                                value = {this.state.count}/><br/>
 
-                    <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button>
+                        <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button> <input type="button" className="btn" value="Clear" onClick={this.Clear}/>
 
                     </div>
                 </form>

@@ -14,8 +14,13 @@ router.post("/add",async(req,res) =>{
         imageUrl:req.body.imageUrl
     });
 
-    await data.save();
-    res.json(data);
+    await data.save().then(data=>{
+
+        res.status(200).json(data);
+
+    }).catch(err=>{
+        res.status(400).json(err);
+    })
 })
 
 router.get("/view",async(req,res) =>{
@@ -44,6 +49,12 @@ router.get('/getByCategory/:name',async (req,res)=>{
     });           
 });
 
+router.get('/getProduct/:id',async (req,res)=>{
+    ProductInfo.findById(req.params.id).then(result=>{
+        res.json(result);
+    });
+});
+
 router.put("/update",async (req,res) =>{
     var update = await ProductInfo.update({_id:req.body._id},{$set:{
             name : req.body.name,
@@ -56,10 +67,12 @@ router.put("/update",async (req,res) =>{
     res.json(update);
 })
 
+
 router.delete("/del/:id",async (req,res) =>{
     var delData = await ProductInfo.findByIdAndRemove(req.params.id).then(e =>{
         res.json({message:"Deleted sucessfully"})
     })
 })
+
 
 module.exports = router;

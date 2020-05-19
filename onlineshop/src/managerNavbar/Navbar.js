@@ -26,7 +26,13 @@ const Navbar = (props) => {
                             </div>
                             <div>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/manager/AddProduct">Category</Link>
+                                    <Link className="nav-link" to="/manager/AddProduct">Add Product</Link>
+                                </li>
+                            </div>
+
+                            <div>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/manager/DiscountProducts">Discount Products</Link>
                                 </li>
                             </div>
                           
