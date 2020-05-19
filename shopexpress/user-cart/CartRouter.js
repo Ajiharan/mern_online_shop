@@ -15,6 +15,25 @@ const ProductSchema=require('../products/ProductSchema');
 //         res.status(400).json(err);
 //     })
 // })
+
+router.get('/total/:id',(req,res)=>{
+    CartSchema.aggregate([
+        {
+            $group:{
+                _id:null,
+                "TotalCount":{
+                    $sum:"$count"
+                }
+            }
+        }
+    ]).then(result=>{
+        res.status(200).json(result);
+    }).catch(err=>{
+        res.status(200).json(err);
+    });
+});
+
+
 router.get('/view/:id',async (req,res)=>{
   CartSchema.aggregate([{$match:{
       uid:req.params.id
