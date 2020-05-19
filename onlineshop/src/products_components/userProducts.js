@@ -22,14 +22,19 @@ const UserProducts = (props) => {
     }
 
     const AddWishList=(e)=>{
-        Axios.post("http://localhost:3000/wishlist/add",{uid:props.UsersData._id,pid:e._id}).then(res=>{
-            console.log(res.data);
-            toast.success("Added to wishlist Sucessfully");
-        }).catch(err=>{
-            console.log(err);
-            toast.error(err.response.data);
-        });
-        console.log(props.UsersData);
+        let hasToken=JSON.parse(localStorage.getItem('auth'));
+        if(!hasToken){
+            history.push('/user/Login');     
+        }else{
+            Axios.post("http://localhost:3000/wishlist/add",{uid:props.UsersData._id,pid:e._id}).then(res=>{
+                console.log(res.data);
+                toast.success("Added to wishlist Sucessfully");
+            }).catch(err=>{
+                console.log(err);
+                toast.error(err.response.data);
+            });
+            console.log(props.UsersData);
+        }
     }
 
     return (

@@ -21,15 +21,20 @@ const CartHome = (props) => {
         }   
     }
     const DeleteFromcart=(id)=>{
-        alert(id);
-    }
-    const UpdateCount=(id)=>{
-           
-        alert(tempCount);
+        axios.delete(`http://localhost:3000/cart/delete/${id}`).then(res=>{
+            SetDatas();
+        }).catch(err=>{
+            console.log(err);
+        })   
     }
 
-    const InfoChange=(event)=>{
-        setCount(event.target.value);
+
+    const InfoChange=(event,id)=>{
+        axios.put("http://localhost:3000/cart/update",{id:id,count:event.target.value}).then(res=>{
+            SetDatas();
+        }).catch(err=>{
+            console.log(err);
+        })   
     }
 
     return (
@@ -40,7 +45,8 @@ const CartHome = (props) => {
             <div className="store-list-container mt-4">
                 <div className="store-list">     
                     {
-                        cardlist.map((e,i)=>(
+                        cardlist.reverse().map((e,i)=>(
+                            (e!==null)?(
                             <div className="row mt-4" key={i}>
                                 <div className="col-md-6 col-sm-12 col-xs-12">
                                         <img  className='card-img-top' src={e.cartDetails[0].imageUrl}/>               
@@ -53,13 +59,13 @@ const CartHome = (props) => {
                                     <button onClick={()=>{DeleteFromcart(e._id)}} className="btn btn-danger mt-4">Remove Item</button>
                                     
                                         <div className="form-group mt-4">
-                                            <input defaultValue={e.count} type="number" onChange={InfoChange} className="form-control"/>
-                                            <button onClick={()=>{UpdateCount(e._id)}} className="btn btn-success mt-4">Update</button>
+                                            <input defaultValue={e.count} type="number" onChange={(event)=>{InfoChange(event,e._id)}} className="form-control"/>
+                                           
                                         </div>                                     
                                     
                                 </div>
                                 
-                            </div>                   
+                            </div>):(null)                   
                         ))
                     }
                 </div>
