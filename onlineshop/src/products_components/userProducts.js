@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
 import {useHistory} from "react-router-dom";
 import Axios from 'axios';
+import ReactStars from 'react-rating-stars-component'
 import { toast } from 'react-toastify';
 const UserProducts = (props) => {
-    const history = useHistory();
+    let history = useHistory();
 
     const CheckAuthentication=(e)=>{
         let hasToken=JSON.parse(localStorage.getItem('auth'));
@@ -37,6 +38,13 @@ const UserProducts = (props) => {
         }
     }
 
+    const SetRatingPage=(id)=>{
+        history.push({
+            pathname: '/user/rating',
+            state: { pid: id } 
+        })
+    }
+
     return (
         <div className="container mt-4" >
             <div className="row" id="product_doc">
@@ -46,9 +54,24 @@ const UserProducts = (props) => {
                             <i className="far fa-heart" onClick={()=>{AddWishList(e)}} style={{cursor:'pointer'}}></i>
                             <img style={{width:'200px',height:'200px'}} className='card-img-top' src={e.imageUrl}/>
                             <div className="card-body">
+                            <ReactStars
+                                    count={5}                                 
+                                    size={24}
+                                    value={e.Rating}
+                                    edit={false}
+                                    half={true}
+                                    emptyIcon={<i className='far fa-star'></i>}
+                                    halfIcon={<i className='fa fa-star-half-alt'></i>}
+                                    fullIcon={<i className='fa fa-star'></i>}
+                                    color2={'#ffd700'} />
                                 <p>{e.count} available</p>
                              <h5 className="card-title">{e.name} ${e.price}</h5>
                                 <button className="btn btn-primary" onClick={()=>{CheckAuthentication(e)}}>Add to cart</button>
+                                
+                            </div>
+                            <div className="modal-footer">
+                                <h6>User Review</h6>
+                            <button onClick={()=>{SetRatingPage(e._id)}} className="btn btn-dark">More</button>
                             </div>
                         </div>
                     ))

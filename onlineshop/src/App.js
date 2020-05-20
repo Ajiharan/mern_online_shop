@@ -21,6 +21,7 @@ import ManagerProtected from "./storeManager/StoreManagerProtected";
 import ManagerHome from "./storeManager/Home";
 import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
+import UserRating from "./userReview/ReviewRating"
 import Wishlist from "./wishlist/home";
 import axios from 'axios';
 
@@ -121,7 +122,7 @@ function App(props) {
       <Route exact path="/user/Login" component={Login}/>
       <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/>
       
-      
+      <UserProtected  exact path="/user/rating" component={UserRating}/> 
       <UserProtected exact path="/user/cart" component={()=><CartHome UpdateData={UpdateCount} CartData={userData}/>} />  
      
       <UserUpdateContext.Provider value={UpdateUi} >

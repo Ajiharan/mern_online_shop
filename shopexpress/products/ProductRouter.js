@@ -1,5 +1,7 @@
 const router=require('express').Router();
 const ProductInfo=require('./ProductSchema');
+const WishlistSchema=require('../user-wishlist/ListSchema');
+const CartSchema=require('../user-cart/CartSchema');
 
 router.get("/",(req,res) =>{
     res.json("I am from product router file");
@@ -69,9 +71,16 @@ router.put("/update",async (req,res) =>{
 
 
 router.delete("/del/:id",async (req,res) =>{
-    var delData = await ProductInfo.findByIdAndRemove(req.params.id).then(e =>{
-        res.json({message:"Deleted sucessfully"})
-    })
+    try{
+         ProductInfo.findByIdAndRemove(req.params.id).then(async e =>{
+           await WishlistSchema.deleteMany({pid:req.params.id});
+           await CartSchema.deleteMany({pid:req.params.id});
+           res.status(200).json({message:"Deleted sucessfully"})
+        });
+    }catch(err){
+        res.status(400).json(err)
+    }
+    
 })
 
 module.exports = router;

@@ -70,7 +70,7 @@ const Navbar = (props) => {
                      <div className="dropdown-menu dropdown-menu-right profile_drop" aria-labelledby="dropdownMenu2">
                         <Link className="dropdown-item" type="button" to="/user/dashboard"><i className="fas fa-user"> </i> My Account</Link>
                         <Link className="dropdown-item" type="button" to="/user/wishlist"><i className="fas fa-list-alt"> </i> Wishlist</Link>
-                        <Link className="dropdown-item" type="button" to="/user/dashboard"><i className="fas fa-credit-card"></i> Card Details</Link>
+                        
                     </div>
                 </div>
                     

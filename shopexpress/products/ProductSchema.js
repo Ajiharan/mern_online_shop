@@ -19,6 +19,10 @@ const ProductSchema=mongoose.Schema({
     imageUrl:{
         type:String,
         required:true
+    },
+    Rating:{
+        type:Number,
+        default:0
     }
 });
 module.exports=mongoose.model('ProductSchema',ProductSchema);
