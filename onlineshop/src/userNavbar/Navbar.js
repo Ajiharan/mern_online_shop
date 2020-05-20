@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useReducer} from 'react';
+import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import {
     BrowserRouter as Router,
@@ -26,7 +26,7 @@ const Navbar = (props) => {
                     console.log(res.data);   
                     currentData=res.data;
                    setUserData(res.data);
-                   setCartCount(props.firstData.TotalCount); 
+                   setCartCount(props.cartCountData); 
                   }).catch(err=>{
                     console.log(err);        
                   }); 
@@ -62,7 +62,7 @@ const Navbar = (props) => {
                  <div className="nav-item display-4" style={{margin:'5px',fontSize:'20px'}}>
                   <Link to="/user/cart" className="text-light nav-link" > <i className="fas fa-shopping-cart" style={{position:'relative',marginRight:'20px'}}>
                       <span className="text-dark bg-warning text-center" style={{width:'18px',borderRadius:'100px',
-                      padding:'1px',position:'absolute',marginTop:'-10px',opacity:'0.8'}}>{CartCount}</span> </i></Link> 
+                      padding:'1px',position:'absolute',marginTop:'-10px',opacity:'0.8'}}>{props.cartCountData}</span> </i></Link> 
                 </div>
                 <div className="nav-item" id="profile">
                 <div className="dropdown">

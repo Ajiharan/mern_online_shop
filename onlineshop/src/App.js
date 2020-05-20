@@ -1,10 +1,10 @@
-import React,{useEffect,useState,useRef} from 'react';
+import React,{useEffect,useState,useRef,useCallback} from 'react';
 import Register from './user/Register';
 import Login from './user/Login';
 import Home from './user/Home';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
 import PageNotFound from './errors/PageNotFound.js';
 import Navbar from './userNavbar/Navbar';
 import UserProtected from './user/UserProtected';
@@ -23,17 +23,53 @@ import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
 import Wishlist from "./wishlist/home";
 import axios from 'axios';
+
 export const UserUpdateContext=React.createContext();
+export const UserCartContext=React.createContext();
+
+// const PrivateRoute = ({Component,CartData,...rest}) => {
+  
+//   console.log(Component);
+//   let userhasToken=JSON.parse(localStorage.getItem('auth'));
+//   console.log("userToken",userhasToken);
+//   return (
+//     <Route
+//       {...rest}
+//       render={
+//           props=>{
+             
+//               return userhasToken !==null ?(<Component {...props}/>):(  <Redirect
+//                   to={{
+//                       pathname:'/user/Login'
+//                   }}
+//                   />)
+
+//           }
+//       }
+    
+    
+//     />
+//   );
+// };
+
+
+
+
 function App(props) {
 
  const [mydata,setData]=useState({});
  const[userData,setUserData]=useState({});
+ const[cartCount,setCartCount]=useState(0);
 
   let myref=useRef({});
   let UserNavigation="";
 
   useEffect(()=>{
-     axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
+    FetchDatas();
+  },[props]);
+
+  const FetchDatas=()=>{
+    axios.get("http://localhost:3000/user/getUser",{headers:{'auth':`${JSON.parse(localStorage.getItem('auth'))}`}}).then(res=>{ 
       axios.get(`http://localhost:3000/cart/total/${res.data._id}`).then(Count_res=>{       
          //console.log("Count Data",Count_res.data.length);
          myref.current=res.data;
@@ -42,33 +78,54 @@ function App(props) {
            console.log("Count_res.length",Count_res.data.length);
           tempCurrent=Count_res.data[0].TotalCount;
          }
-         setUserData({...res.data,TotalCount:tempCurrent});
+         setCartCount(tempCurrent);
+         setUserData(res.data);
          console.log("App Data",res.data);
        });
       
      });
-   
-  },[props]);
+  }
 
-  const UpdateUi=(udata)=>{
+
+  const UpdateUi=useCallback((udata)=>{
     console.log("Udata",udata)
     setData(udata);
-  }
+  },[])
+
+  const UpdateCount=useCallback(()=>{
+   
+      axios.get(`http://localhost:3000/cart/total/${myref.current._id}`).then(Count_res=>{       
+         console.log("Count Data",Count_res.data[0].TotalCount);
+      
+         let tempCurrent=0;
+         if(Count_res.data.length > 0){
+           console.log("Count_res.length",Count_res.data.length);
+          tempCurrent=Count_res.data[0].TotalCount;
+         }
+         setCartCount(tempCurrent);   
+         
+       });
+      console.log("Worked")
+    
+  },[])
   
 
   if(props.uToken){
     UserNavigation=<div className="App">
-    
-        <Navbar firstData={userData} updateData={mydata}/>
   
+      <Navbar  cartCountData={cartCount} firstData={userData} updateData={mydata}/>
+    
     <Switch>
       <Route exact path="/" component={()=><Home Udata={userData}/>}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
-      <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/> 
-      <UserProtected exact path="/user/cart" component={()=><CartHome CartData={userData}/>}/>
+      <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/>
+      
+      
+      <UserProtected exact path="/user/cart" component={()=><CartHome UpdateData={UpdateCount} CartData={userData}/>} />  
+     
       <UserUpdateContext.Provider value={UpdateUi} >
-       <UserProtected exact path="/user/dashboard" component={UserDashboard}/>    
+       <UserProtected  exact path="/user/dashboard" component={UserDashboard}/>    
       </UserUpdateContext.Provider>
       
       <Route exact component={PageNotFound}/>
@@ -122,4 +179,4 @@ function App(props) {
   );
 }
 
-export default App;
+export default React.memo(App);

@@ -50,7 +50,7 @@ const Home = (props) => {
             <div className="store-list-container mt-4">
                 <div className="store-list">     
                     {
-                        wishlist.reverse().map((e,i)=>(
+                        wishlist.map((e,i)=>(
                             (e!==null)?(
                                 <div className="row mt-4" key={i}>
                                     <div className="col-md-6 col-sm-12 col-xs-12">

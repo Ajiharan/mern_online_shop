@@ -11,7 +11,7 @@ const UserProtected = ({component,...rest}) => {
         render={
             props=>{
                 console.log("Component",props);
-                return userhasToken !==null ?(<RenderComponent {...props}/>):(  <Redirect
+                return userhasToken !==null ?(<RenderComponent {...rest} {...props}/>):(  <Redirect
                     to={{
                         pathname:'/user/Login'
                     }}

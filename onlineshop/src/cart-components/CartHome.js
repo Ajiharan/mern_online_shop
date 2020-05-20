@@ -1,20 +1,25 @@
 import React,{Fragment,useState,useEffect,useRef} from 'react';
 import axios from 'axios';
+import {UserCartContext} from '../App';
 const CartHome = (props) => {
     const [cardlist,setCart]=useState([]);
-    const[tempCount,setCount]=useState(1);
+    const[tempCount,setCount]=useState(1); 
+    const[totalPrice,setPrice]=useState(0);
     const myref=useRef([]);
-
+   
     useEffect(()=>{
         setCart(props.CartData);
+        console.log("Props.CartData",props.CartData);
         SetDatas();
-    },[]);
+    },[props]);
 
     const SetDatas=()=>{
         if(props.CartData._id !==undefined){
             axios.get(`http://localhost:3000/cart/view/${props.CartData._id}`).then(res=>{
-                myref.current=res.data
+                myref.current=res.data;
+                let tot=res.data.reduce((acc,e)=>acc+(e.count*e.cartDetails[0].price),0)
                 setCart(res.data);
+                setPrice(tot);
             }).catch(err=>{
                 console.log(err);
             })
@@ -22,19 +27,21 @@ const CartHome = (props) => {
     }
     const DeleteFromcart=(id)=>{
         axios.delete(`http://localhost:3000/cart/delete/${id}`).then(res=>{
-            SetDatas();
+            SetDatas();          
         }).catch(err=>{
             console.log(err);
-        })   
+        })        
     }
 
 
     const InfoChange=(event,id)=>{
-        axios.put("http://localhost:3000/cart/update",{id:id,count:event.target.value}).then(res=>{
-            SetDatas();
+        axios.put("http://localhost:3000/cart/update",{id:id,count:event.target.value}).then(res=>{         
+           SetDatas();
+          // props.UpdateData();
         }).catch(err=>{
             console.log(err);
-        })   
+        })
+           
     }
 
     return (
@@ -42,10 +49,17 @@ const CartHome = (props) => {
         { cardlist.length > 0?(
             <Fragment>
             <h4 className="text-center bg-danger text-light" style={{opacity:'0.8'}}>My Cart</h4>
+            <div className="row">
+                <div className="col text-center">
+                    <h6>Sub Total : ${totalPrice}</h6>
+                <button className="btn btn-warning text-white">Proceed to CheckOut</button>
+                </div>
+            </div>
+           
             <div className="store-list-container mt-4">
                 <div className="store-list">     
                     {
-                        cardlist.reverse().map((e,i)=>(
+                        cardlist.map((e,i)=>(
                             (e!==null)?(
                             <div className="row mt-4" key={i}>
                                 <div className="col-md-6 col-sm-12 col-xs-12">
@@ -76,4 +90,4 @@ const CartHome = (props) => {
     );
 };
 
-export default CartHome;
+export default React.memo(CartHome);
