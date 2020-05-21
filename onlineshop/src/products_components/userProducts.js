@@ -38,10 +38,10 @@ const UserProducts = (props) => {
         }
     }
 
-    const SetRatingPage=(id)=>{
+    const SetRatingPage=(pdata)=>{
         history.push({
             pathname: '/user/rating',
-            state: { pid: id } 
+            state: { details:pdata,uid:props.UsersData._id } 
         })
     }
 
@@ -71,7 +71,7 @@ const UserProducts = (props) => {
                             </div>
                             <div className="modal-footer">
                                 <h6>User Review</h6>
-                            <button onClick={()=>{SetRatingPage(e._id)}} className="btn btn-dark">More</button>
+                            <button onClick={()=>{SetRatingPage(e)}} className="btn btn-dark">More</button>
                             </div>
                         </div>
                     ))

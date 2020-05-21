@@ -11,6 +11,7 @@ const productRouter=require('./products/ProductRouter');
 const mailRouter=require('./admin-mail/mailSender');
 const wishlistRouter=require('./user-wishlist/ListRouter');
 const CartRouter=require('./user-cart/CartRouter');
+const RatingRouter=require('./rating/RatingRouter');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
 mongoose.set('useFindAndModify',false);
@@ -32,6 +33,7 @@ app.use('/admin/mail',mailRouter);
 app.use('/product',productRouter);
 app.use('/wishlist',wishlistRouter);
 app.use('/cart',CartRouter);
+app.use('/rating',RatingRouter);
 
 app.listen(3000,(err)=>{
     if(err)

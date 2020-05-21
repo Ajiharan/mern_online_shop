@@ -261,3 +261,17 @@ padding-right: 20px;
 overflow-y: scroll;
 flex-grow: 1;
 }
+
+.containerStar{
+  display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.UserContainer-rating{
+  display: flex;
+  justify-content: center;
+}
+
+
