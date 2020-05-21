@@ -48,6 +48,17 @@ router.get('/getAverage/:id',(req,res)=>{
     });
 });
 
+router.get('/getUserRate',async(req,res)=>{
+    try{
+        console.log("params",req.query);
+        let userRatingData=await RatingSchema.findOne({uid:req.query.uid,pid:req.query.pid});
+        res.status(200).json(userRatingData);
+    }catch(err){
+        res.status(400).json(err);
+    }
+    
+})
+
 
 
 
