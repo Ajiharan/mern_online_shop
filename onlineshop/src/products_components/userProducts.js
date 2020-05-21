@@ -70,8 +70,8 @@ const UserProducts = (props) => {
                                 
                             </div>
                             <div className="modal-footer">
-                                <h6>User Review</h6>
-                            <button onClick={()=>{SetRatingPage(e)}} className="btn btn-dark">More</button>
+                                <h6 className="mt-1">View Review</h6>
+                            <button onClick={()=>{SetRatingPage(e)}} className="btn btn-link">More</button>
                             </div>
                         </div>
                     ))

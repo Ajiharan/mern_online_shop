@@ -7,7 +7,7 @@ const RatingSchema=mongoose.Schema({
         required:true
     },
     uid:{
-        type:mongoose.Schema.ObjectId,
+        type:String,
         required:true
     },
     rating:{

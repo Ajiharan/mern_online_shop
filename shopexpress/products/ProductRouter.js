@@ -2,7 +2,7 @@ const router=require('express').Router();
 const ProductInfo=require('./ProductSchema');
 const WishlistSchema=require('../user-wishlist/ListSchema');
 const CartSchema=require('../user-cart/CartSchema');
-
+const RateSchema=require('../rating/RatingSchema');
 router.get("/",(req,res) =>{
     res.json("I am from product router file");
 })
@@ -69,12 +69,25 @@ router.put("/update",async (req,res) =>{
     res.json(update);
 })
 
+router.put("/updateRate",async (req,res) =>{
+    try{
+        var update = await ProductInfo.update({_id:req.body.id},{$set:{
+            Rating:req.body.rating
+         }});
+        res.status(200).json(update);
+    }catch(err){
+        res.status(400).json(err);
+    }
+    
+})
+
 
 router.delete("/del/:id",async (req,res) =>{
     try{
          ProductInfo.findByIdAndRemove(req.params.id).then(async e =>{
            await WishlistSchema.deleteMany({pid:req.params.id});
            await CartSchema.deleteMany({pid:req.params.id});
+           await RateSchema.deleteMany({pid:req.params.id});
            res.status(200).json({message:"Deleted sucessfully"})
         });
     }catch(err){

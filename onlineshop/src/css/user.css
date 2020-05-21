@@ -255,6 +255,22 @@ box-shadow:inset 0px 20px 1px #17a2b8;
 border: 1px solid #17a2b8;
 
 }
+
+.rate-list-container{
+  position: absolute;
+ height: 500px;
+  background-color: white;
+  right: 25%;
+  left: 25%;
+  display: flex;
+  justify-content: center;
+  top: 580px;
+  margin-bottom: 25px;
+  width: auto;
+  box-shadow:inset 0px 20px 1px #17a2b8;
+  border: 1px solid #17a2b8;
+  
+  }
 .store-list{
 padding-left: 20px;
 padding-right: 20px;
@@ -273,5 +289,8 @@ flex-grow: 1;
   display: flex;
   justify-content: center;
 }
-
+.reviewContainer{
+  display: flex;
+  justify-content:center;
+}
 
