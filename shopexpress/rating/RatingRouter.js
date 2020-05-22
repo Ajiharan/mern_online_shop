@@ -116,10 +116,18 @@ router.get('/ProductData/:id',(req,res)=>{
         res.status(200).json(Data);
       }).catch(err=>{
         res.status(400).json(err); 
-      })
-       
-        
+      })        
     
-})
+});
+
+
+router.delete('/delete/:id',async(req,res)=>{
+    try{
+        let DelData=await RatingSchema.deleteOne({_id:req.params.id});
+        res.status(200).json("Delete Sucessfully");
+    }catch(err){
+        res.status(400).json(err); 
+    }  
+});
 
 module.exports=router;
