@@ -103,22 +103,31 @@ const ReviewRating = (props) => {
 
     const UpdateComment=async (e)=>{
         e.preventDefault();
-        // alert(userComment);
-        if(CurrentuserRate > 0){
-           await axios.put('http://localhost:3000/rating/updateComment',{id:userId,comment:userComment}).then(res=>{
+        if(isEdit){
+            await axios.put('http://localhost:3000/rating/editComment',{id:userId,comment:userComment}).then(res=>{
                 toast.success(res.data);
+                
             }).catch(err=>{
                 toast.error(err.response.data);
             })
         }else{
-           await axios.post('http://localhost:3000/rating/addComment',
-            {uid:location.state.uid,pid:location.state.details._id,comment:userComment}).then(res=>{
-                toast.success(res.data);
-            }).catch(err=>{
-                toast.error(err.response.data);
-            })
-            
+            if(CurrentuserRate > 0){
+                await axios.put('http://localhost:3000/rating/updateComment',{id:userId,comment:userComment}).then(res=>{
+                     toast.success(res.data);
+                 }).catch(err=>{
+                     toast.error(err.response.data);
+                 })
+             }else{
+                await axios.post('http://localhost:3000/rating/addComment',
+                 {uid:location.state.uid,pid:location.state.details._id,comment:userComment}).then(res=>{
+                     toast.success(res.data);
+                 }).catch(err=>{
+                     toast.error(err.response.data);
+                 })
+                 
+             }
         }
+       
        await UpdateUi();
        setComment("");
        setEdit(false);

@@ -72,6 +72,25 @@ router.put('/updateComment',async (req,res)=>{
         res.status(400).json(err);
     }
 });
+
+router.put('/editComment',async (req,res)=>{
+    try{
+        let isExists=await RatingSchema.findOne({_id:req.body.id});
+        if(isExists){
+            let UpdateData=await RatingSchema.updateOne({_id:req.body.id},{$set:{
+                comment:req.body.comment
+            }});
+            res.status(200).json("Thank your for giving review...");
+          
+        }else{
+            res.status(400).json("Review already exists...");
+        }
+       
+    }catch(err){
+        res.status(400).json(err);
+    }
+});
+
 router.put('/updateRate',async (req,res)=>{
     try{
         let isExists=await RatingSchema.findOne({_id:req.body.id});
