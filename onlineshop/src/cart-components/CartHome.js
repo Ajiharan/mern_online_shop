@@ -73,7 +73,7 @@ const CartHome = (props) => {
                                     <button onClick={()=>{DeleteFromcart(e._id)}} className="btn btn-danger mt-4">Remove Item</button>
                                     
                                         <div className="form-group mt-4">
-                                            <input defaultValue={e.count} type="number" onChange={(event)=>{InfoChange(event,e._id)}} className="form-control"/>
+                                            <input min="1" defaultValue={e.count} type="number" onChange={(event)=>{InfoChange(event,e._id)}} className="form-control"/>
                                            
                                         </div>                                     
                                     

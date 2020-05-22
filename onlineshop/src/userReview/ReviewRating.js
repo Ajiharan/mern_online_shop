@@ -3,11 +3,14 @@ import {useLocation,Redirect} from "react-router-dom";
 import ReactStars from 'react-rating-stars-component'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import ReviewList from './ReviewList';
 const ReviewRating = (props) => {
    const[productRating,setRating]=useState(0);
    const[userCount,setUserCount]=useState(0);
    const[CurrentuserRate,setCurrentUserRate]=useState(0);
    const[isTrue,setVerify]=useState(true);
+   const[userComment,setComment]=useState("");
+   const[userId,setUserId]=useState(0);
     const location = useLocation();
     
     useEffect(()=>{
@@ -19,11 +22,13 @@ const ReviewRating = (props) => {
         });
         axios.get('http://localhost:3000/rating/getUserRate',{params:{pid:location.state.details._id,uid:location.state.uid}})
         .then(urest=>{
-            //console.log("Ures",ures.data)
+           
             if(urest.data.rating > 0){
                 setVerify(false);
             }
+             console.log("Ures",urest.data.rating)
             setCurrentUserRate(urest.data.rating);
+            setUserId(urest.data._id);
            
         }).catch(err=>{
             console.log(err);
@@ -32,26 +37,47 @@ const ReviewRating = (props) => {
     },[]);
 
     const ratingChanged = (newRating) => {
-        // console.log(newRating)
-        axios.post('http://localhost:3000/rating/add',{uid:location.state.uid,pid:location.state.details._id,rating:newRating})
-        .then(result=>{
-            axios.get(`http://localhost:3000/rating/getAverage/${location.state.details._id}`).then(res=>{
-                axios.put('http://localhost:3000/product/updateRate',{id:location.state.details._id,rating:res.data[0].totalAverage}).then(ures=>{                    
-                        setRating(res.data[0].totalAverage);
-                        setUserCount(res.data[0].count);
-                         UpdateUi(); 
-                        toast.success(result.data);                            
-                }).catch(err=>{
-                    console.log(err);
-                })
-               
-              }).catch(err=>{
-                  console.log(err);
-            })
-            
-        }).catch(err=>{
-            toast.error(err.response.data);      
-        });
+        console.log("UserId",userId);
+        if(userId===0){
+            axios.post('http://localhost:3000/rating/add',{uid:location.state.uid,pid:location.state.details._id,rating:newRating})
+            .then(result=>{
+                axios.get(`http://localhost:3000/rating/getAverage/${location.state.details._id}`).then(res=>{
+                    axios.put('http://localhost:3000/product/updateRate',{id:location.state.details._id,rating:res.data[0].totalAverage}).then(ures=>{                    
+                            setRating(res.data[0].totalAverage);
+                            setUserCount(res.data[0].count);                    
+                             UpdateUi(); 
+                            toast.success(result.data);                            
+                    }).catch(err=>{
+                        console.log(err);
+                    });
+                   
+                  }).catch(err=>{
+                      console.log(err);
+                });             
+            }).catch(err=>{
+                toast.error(err.response.data);      
+            });
+        }else{
+            axios.put('http://localhost:3000/rating/updateRate',{id:userId,rating:newRating})
+            .then(result=>{
+                axios.get(`http://localhost:3000/rating/getAverage/${location.state.details._id}`).then(res=>{
+                    axios.put('http://localhost:3000/product/updateRate',{id:location.state.details._id,rating:res.data[0].totalAverage}).then(ures=>{                    
+                            setRating(res.data[0].totalAverage);
+                            setUserCount(res.data[0].count);                          
+                             UpdateUi(); 
+                            toast.success(result.data);                            
+                    }).catch(err=>{
+                        console.log(err);
+                    });
+                   
+                  }).catch(err=>{
+                      console.log(err);
+                });             
+            }).catch(err=>{
+                toast.error(err.response.data);      
+            });
+        }
+       
 
         UpdateUi();
     }
@@ -59,19 +85,41 @@ const ReviewRating = (props) => {
     const UpdateUi=()=>{
         axios.get('http://localhost:3000/rating/getUserRate',{params:{pid:location.state.details._id,uid:location.state.uid}})
         .then(urest=>{
-                console.log("urest.data.rating",urest.data.rating);
+                console.log("urest.data.Id",urest.data);
                 if(urest.data.rating > 0){
                     setVerify(false);
                 }
                 setCurrentUserRate(urest.data.rating);
+                setUserId(urest.data._id);
                
         }).catch(err=>{
             console.log(err);
         });
     }
+    const InfoChange=(event)=>{
+        setComment(event.target.value);
+    }
 
-    const UpdateComment=(e)=>{
+    const UpdateComment=async (e)=>{
         e.preventDefault();
+        // alert(userComment);
+        if(CurrentuserRate > 0){
+           await axios.put('http://localhost:3000/rating/updateComment',{id:userId,comment:userComment}).then(res=>{
+                toast.success(res.data);
+            }).catch(err=>{
+                toast.error(err.response.data);
+            })
+        }else{
+           await axios.post('http://localhost:3000/rating/addComment',
+            {uid:location.state.uid,pid:location.state.details._id,comment:userComment}).then(res=>{
+                toast.success(res.data);
+            }).catch(err=>{
+                toast.error(err.response.data);
+            })
+            
+        }
+        UpdateUi();
+        document.getElementById("frm").reset();
     }
    
     return (
@@ -123,10 +171,10 @@ const ReviewRating = (props) => {
                                 halfIcon={<i className='fa fa-star-half-alt'></i>}
                                 fullIcon={<i className='fa fa-star'></i>}
                                 color2={'#ffd700'} /> 
-                            <form onSubmit={UpdateComment}>
+                            <form id="frm" onSubmit={UpdateComment}>
                                 <div className="form-group">
-                                    <label for="txtComment">Comment</label>
-                                    <textarea name="txtComment" placeholder="Add your Comment" rows={3} id="txtComment" className="form-control"/>
+                                    <label htmlFor="txtComment">Comment</label>
+                                    <textarea onChange={InfoChange} name="txtComment" placeholder="Add your Comment" rows={3} id="txtComment" className="form-control" required/>
                                 </div>
                                 <input type="submit" className="btn btn-success" value="Add"/>
                             </form> 
@@ -134,11 +182,8 @@ const ReviewRating = (props) => {
                         <div className="col col-2  mt-4"></div>   
                    </div>
                    <div className="row">
-                         <div className="rate-list-container mt-4">
-                                <div className="store-list">     
-                                        
-                                </div>
-                           </div>  
+                       <ReviewList CommentData={userComment} StarRating={CurrentuserRate} AllData={location.state}/>
+                       
                     </div>
                    </Fragment>
                 ):(<Redirect to={{
@@ -150,4 +195,4 @@ const ReviewRating = (props) => {
     );
 };
 
-export default ReviewRating;
+export default React.memo(ReviewRating);
