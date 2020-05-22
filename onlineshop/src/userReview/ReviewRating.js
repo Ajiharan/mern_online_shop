@@ -11,6 +11,7 @@ const ReviewRating = (props) => {
    const[isTrue,setVerify]=useState(true);
    const[userComment,setComment]=useState("");
    const[userId,setUserId]=useState(0);
+   const[isEdit,setEdit]=useState(false);
     const location = useLocation();
     
     useEffect(()=>{
@@ -102,24 +103,54 @@ const ReviewRating = (props) => {
 
     const UpdateComment=async (e)=>{
         e.preventDefault();
-        // alert(userComment);
-        if(CurrentuserRate > 0){
-           await axios.put('http://localhost:3000/rating/updateComment',{id:userId,comment:userComment}).then(res=>{
+        if(isEdit){
+            await axios.put('http://localhost:3000/rating/editComment',{id:userId,comment:userComment}).then(res=>{
                 toast.success(res.data);
+                
             }).catch(err=>{
                 toast.error(err.response.data);
             })
         }else{
-           await axios.post('http://localhost:3000/rating/addComment',
-            {uid:location.state.uid,pid:location.state.details._id,comment:userComment}).then(res=>{
-                toast.success(res.data);
-            }).catch(err=>{
-                toast.error(err.response.data);
-            })
-            
+            if(CurrentuserRate > 0){
+                await axios.put('http://localhost:3000/rating/updateComment',{id:userId,comment:userComment}).then(res=>{
+                     toast.success(res.data);
+                 }).catch(err=>{
+                     toast.error(err.response.data);
+                 })
+             }else{
+                await axios.post('http://localhost:3000/rating/addComment',
+                 {uid:location.state.uid,pid:location.state.details._id,comment:userComment}).then(res=>{
+                     toast.success(res.data);
+                 }).catch(err=>{
+                     toast.error(err.response.data);
+                 })
+                 
+             }
         }
-        UpdateUi();
+       
+       await UpdateUi();
+       setComment("");
+       setEdit(false);
         document.getElementById("frm").reset();
+        
+    }
+
+    const UpdateReview=(comment)=>{
+            setEdit(!isEdit)
+            setComment(comment);
+    }
+
+    const DeleteComment=(id)=>{
+        axios.delete(`http://localhost:3000/rating/delete/${id}`).then(async res=>{
+            toast.success(res.data);
+            setVerify(true);
+            setCurrentUserRate(0);
+            await UpdateUi();
+            setComment("");
+            setUserId(0);
+        }).catch(err=>{
+            console.log(err);
+        })      
     }
    
     return (
@@ -174,15 +205,19 @@ const ReviewRating = (props) => {
                             <form id="frm" onSubmit={UpdateComment}>
                                 <div className="form-group">
                                     <label htmlFor="txtComment">Comment</label>
-                                    <textarea onChange={InfoChange} name="txtComment" placeholder="Add your Comment" rows={3} id="txtComment" className="form-control" required/>
+                                    <textarea value={userComment} onChange={InfoChange} name="txtComment" placeholder="Add your Comment" rows={3} id="txtComment" className="form-control" required/>
                                 </div>
-                                <input type="submit" className="btn btn-success" value="Add"/>
+                                {
+                                    isEdit?(<input type="submit" className="btn btn-warning" value="Update"/>)
+                                    :(<input type="submit" className="btn btn-success" value="Add"/>)
+                                }
+                                
                             </form> 
                         </div>
                         <div className="col col-2  mt-4"></div>   
                    </div>
                    <div className="row">
-                       <ReviewList CommentData={userComment} StarRating={CurrentuserRate} AllData={location.state}/>
+                       <ReviewList upd={UpdateReview} Del={DeleteComment} CommentData={userComment} StarRating={CurrentuserRate} AllData={location.state}/>
                        
                     </div>
                    </Fragment>
