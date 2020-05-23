@@ -30,7 +30,9 @@ const Payment = (props) => {
         }),
 
         onSubmit:(formData,{setSubmitting})=> {
-            axios.post("http://localhost:3000/payment/add", formData).then(res => {
+            //console.log("FormData",formData);
+            axios.post("http://localhost:3000/payment/add", {...formData,uid:location.state.uid,total:location.state.total})
+            .then(res => {
                 toast.success("Successfully paid!!!");
             }).catch(err => {
                 console.log(err)
