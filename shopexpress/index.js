@@ -13,6 +13,7 @@ const wishlistRouter=require('./user-wishlist/ListRouter');
 const CartRouter=require('./user-cart/CartRouter');
 const paymentRouter = require('./Payment/PaymentRouter');
 const RatingRouter=require('./rating/RatingRouter');
+const OrderRouter=require('./userOrder/OrderRouter');
 mongoose.set('useNewUrlParser',true );
 mongoose.set('useUnifiedTopology',true );
 mongoose.set('useFindAndModify',false);
@@ -36,6 +37,7 @@ app.use('/wishlist',wishlistRouter);
 app.use('/cart',CartRouter);
 app.use('/payment',paymentRouter);
 app.use('/rating',RatingRouter);
+app.use('/order',OrderRouter);
 
 app.listen(3000,(err)=>{
     if(err)

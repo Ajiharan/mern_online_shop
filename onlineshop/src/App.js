@@ -23,6 +23,7 @@ import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
 import UserRating from "./userReview/ReviewRating"
 import Wishlist from "./wishlist/home";
+import Payment from "./orders/Payment";
 import axios from 'axios';
 
 export const UserUpdateContext=React.createContext();
@@ -122,7 +123,7 @@ function App(props) {
       <Route exact path="/user/Login" component={Login}/>
       <Route exact path="/user/cart" render={(props)=><CartHome {...props} UpdateData={UpdateCount} CartData={userData}/>} />  
       <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/>
-      
+      <UserProtected exact path="/user/payment" component={Payment}/>
       <UserProtected  exact path="/user/rating" component={UserRating}/> 
      
      

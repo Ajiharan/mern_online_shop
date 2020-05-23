@@ -1,5 +1,6 @@
 import React,{Fragment,useState,useEffect,useRef} from 'react';
 import axios from 'axios';
+import {useHistory} from "react-router-dom";
 import {UserCartContext} from '../App';
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
@@ -9,20 +10,20 @@ const CartHome = (props) => {
     const[tempCount,setCount]=useState(1); 
     const[totalPrice,setPrice]=useState(0);
     const myref=useRef([]);
-
+    let history = useHistory();
     useEffect(()=>{
         setCart(props.CartData);
         console.log("Props.CartData",props.CartData);
         SetDatas();
-    },[props.CartData,props.updateData]);
+    },[props.CartData]);
 
     const SetDatas=()=>{
         if(props.CartData._id !==undefined){
-            axios.get(`http://localhost:3000/cart/view/${props.CartData._id}`).then(res=>{
+            axios.get(`http://localhost:3000/cart/view/${props.CartData._id}`).then(async res=>{
                 myref.current=res.data;
-                let tot=res.data.reduce((acc,e)=>acc+(e.count > 3 ? (e.count*e.cartDetails[0].price - (e.count-3)*e.cartDetails[0].price/10)  :  (e.count*e.cartDetails[0].price)),0)
-                setCart(res.data);
-                setPrice(tot);
+                let tot=await res.data.reduce((acc,e)=>acc+(e.count > 3 ? (e.count*e.cartDetails[0].price - (e.count-3)*e.cartDetails[0].price/10)  :  (e.count*e.cartDetails[0].price)),0)
+                await setCart(res.data);
+                await setPrice(tot);
             }).catch(err=>{
                 console.log(err);
             })
@@ -30,23 +31,35 @@ const CartHome = (props) => {
     }
 
     const DeleteFromcart=(id)=>{
-        axios.delete(`http://localhost:3000/cart/delete/${id}`).then(res=>{
-            SetDatas();          
+        axios.delete(`http://localhost:3000/cart/delete/${id}`).then(async res=>{
+           await SetDatas();  
+            await props.UpdateData();           
         }).catch(err=>{
             console.log(err);
         })     
-        props.UpdateData();   
+       
     }
 
 
     const InfoChange=(event,id)=>{
-        axios.put("http://localhost:3000/cart/update",{id:id,count:event.target.value}).then(res=>{         
-           SetDatas();
-          props.UpdateData();
+        axios.put("http://localhost:3000/cart/update",{id:id,count:event.target.value}).then(async res=>{         
+           await SetDatas();
+          await props.UpdateData();
         }).catch(err=>{
             console.log(err);
         })
 
+    }
+
+    const GotoPayment=()=>{
+       axios.post('http://localhost:3000/order/add',{uid:cardlist[0].uid,total:totalPrice}).then(res=>{
+        history.push({
+            pathname: '/user/payment',
+            state: { uid:cardlist[0].uid,total:totalPrice,orderId:res.data._id } 
+        })
+       }).catch(err=>{
+           console.log(err);
+       })
     }
 
     return (
@@ -104,7 +117,7 @@ const CartHome = (props) => {
 
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Make an order</button>
+                                    <button type="button" data-dismiss="modal" onClick={GotoPayment} className="btn btn-primary">Make an order</button>
 
                                 </div>
                             </div>

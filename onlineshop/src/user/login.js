@@ -12,9 +12,6 @@ const Login = (props) => {
         let temail= document.querySelector("#email");
         let tpass= document.querySelector("#password");
        
- 
-       
- 
          if(formik.errors.email && formik.touched.email){
              temail.classList.add("error");
           }else{
