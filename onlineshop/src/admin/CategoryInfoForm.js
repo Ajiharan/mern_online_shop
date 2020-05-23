@@ -53,6 +53,14 @@ class CategoryInfoForm extends React.Component {
         }
     }
 
+    Clear = () =>{
+        this.setState({
+            name: "",
+            isEdit: false
+        })
+
+    }
+
     render() {
         return (
             <div  className="container" style={{height:"200px",width:"500px"}}>
@@ -65,12 +73,11 @@ class CategoryInfoForm extends React.Component {
                                value = {this.state.name}/>
                     </div>
 
-                    <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button>
+                    <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button> <input type="button" className="btn" value="Clear" onClick={this.Clear}/>
                 </form>
             </div>
         );
     }
-
 
 
 }

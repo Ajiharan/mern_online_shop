@@ -7,6 +7,7 @@ router.post('/add',async(req,res)=>{
     try{
         let orderData=await new OrderSchema({
             uid:req.body.uid,
+            cardlist : req.body.cardlist,
             total:req.body.total
         });
     
@@ -17,6 +18,11 @@ router.post('/add',async(req,res)=>{
     }
    
 });
+
+router.get('/getOrdersData',async(req,res) =>{
+    var findData = await OrderSchema.find().limit(15);
+    res.json(findData);
+})
 
 
 router.get('/get/:uid',async(req,res)=>{

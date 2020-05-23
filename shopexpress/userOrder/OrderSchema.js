@@ -7,6 +7,13 @@ const OrderSchema=mongoose.Schema({
         type:String,
         required:true
     },
+
+    cardlist :{
+      type:Array,
+        required:true
+
+    },
+
     total:{
         type:Number,
         default:0

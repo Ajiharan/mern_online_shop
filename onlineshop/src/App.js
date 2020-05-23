@@ -1,6 +1,6 @@
 import React,{useEffect,useState,useRef,useCallback,useMemo} from 'react';
 import Register from './user/Register';
-import Login from './user/Login';
+import Login from './user/login';
 import Home from './user/Home';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,6 +21,7 @@ import ManagerProtected from "./storeManager/StoreManagerProtected";
 import ManagerHome from "./storeManager/Home";
 import ManagerLogin from "./storeManager/Login";
 import Product from "./storeManager/Product";
+import ViewOrders from "./storeManager/ViewOrders";
 import UserRating from "./userReview/ReviewRating"
 import Wishlist from "./wishlist/home";
 import Payment from "./orders/Payment";
@@ -154,8 +155,8 @@ function App(props) {
       <Switch>
       <ManagerProtected  exact path="/" component={ManagerHome}/>
       <ManagerProtected exact path="/manager/AddProduct" component={Product}/>
-
-        <Route exact component={PageNotFound}/>
+          <ManagerProtected exact path="/manager/Orders" component={ViewOrders}/>
+          <Route exact component={PageNotFound}/>
     </Switch>
     <ToastContainer autoClose={1400} />   
   </div>
