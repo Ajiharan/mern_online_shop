@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useRef,useCallback} from 'react';
+import React,{useEffect,useState,useRef,useCallback,useMemo} from 'react';
 import Register from './user/Register';
 import Login from './user/Login';
 import Home from './user/Home';
@@ -93,10 +93,10 @@ function App(props) {
     setData(udata);
   },[])
 
-  const UpdateCount=useCallback(()=>{
+  const UpdateCount=()=>{
    
       axios.get(`http://localhost:3000/cart/total/${myref.current._id}`).then(Count_res=>{       
-         console.log("Count Data",Count_res.data[0].TotalCount);
+       //  console.log("Count Data",Count_res.data[0].TotalCount);
       
          let tempCurrent=0;
          if(Count_res.data.length > 0){
@@ -108,7 +108,7 @@ function App(props) {
        });
       console.log("Worked")
     
-  },[])
+  }
   
 
   if(props.uToken){
@@ -117,13 +117,14 @@ function App(props) {
       <Navbar  cartCountData={cartCount} firstData={userData} updateData={mydata}/>
     
     <Switch>
-      <Route exact path="/" component={()=><Home Udata={userData}/>}/>
+      <Route exact path="/" render={(props)=><Home {...props} UpdateData={UpdateCount}  Udata={userData}/>}/>
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
+      <Route exact path="/user/cart" render={(props)=><CartHome {...props} UpdateData={UpdateCount} CartData={userData}/>} />  
       <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/>
       
       <UserProtected  exact path="/user/rating" component={UserRating}/> 
-      <UserProtected exact path="/user/cart" component={()=><CartHome UpdateData={UpdateCount} CartData={userData}/>} />  
+     
      
       <UserUpdateContext.Provider value={UpdateUi} >
        <UserProtected  exact path="/user/dashboard" component={UserDashboard}/>    

@@ -66,7 +66,7 @@ const Home = (props) => {
                 </ProductContent.Provider>            
             </div>
             <div >
-                 <UserProduct UsersData={props.Udata} ProductData={productData}/>
+                 <UserProduct UpdData={props.UpdateData} UsersData={props.Udata} ProductData={productData}/>
              </div>
         </div>
     </div>    

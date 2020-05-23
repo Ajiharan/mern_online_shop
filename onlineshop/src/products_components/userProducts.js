@@ -13,12 +13,13 @@ const UserProducts = (props) => {
         }else{
             Axios.post('http://localhost:3000/cart/add',{uid:props.UsersData._id,pid:e._id}).then(res=>{
                 console.log(res.data);
+                props.UpdData();
                 toast.success("Added to cart Sucessfully");
             }).catch(err=>{
                 console.log(err);
                 toast.error(err.response.data);
             });
-           // console.log(props.UsersData._id);
+          
         }
     }
 
@@ -39,10 +40,15 @@ const UserProducts = (props) => {
     }
 
     const SetRatingPage=(pdata)=>{
-        history.push({
-            pathname: '/user/rating',
-            state: { details:pdata,uid:props.UsersData._id } 
-        })
+        let hasToken=JSON.parse(localStorage.getItem('auth'));
+        if(!hasToken){
+            history.push('/user/Login');     
+        }else{
+            history.push({
+                pathname: '/user/rating',
+                state: { details:pdata,uid:props.UsersData._id } 
+            })
+        }
     }
 
     return (
