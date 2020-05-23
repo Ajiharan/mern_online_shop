@@ -3,11 +3,12 @@ import formik,{useFormik} from 'formik';
 import * as yup from 'yup';
 import axios from 'axios'
 import { toast } from 'react-toastify';
-import {Route,Redirect} from 'react-router-dom';
+import {Route,Redirect,useHistory} from 'react-router-dom';
 import ManagerPolicy from '../storeManager/policy';
 
 const Register = (props) => {
     let hasToken=JSON.parse(localStorage.getItem('auth'));
+    let history = useHistory();
     const [displayEvent,setDisplay]=useState(false);
     useEffect(()=>{
         console.log("useEffect");
@@ -182,7 +183,7 @@ const Register = (props) => {
                                 <a href="#"> condition of use</a> and  <a href="#"> privacy Policy</a></p>
                             </div>
                             <div className="container-login">
-                                <p  className="container-condition">Already Have an Account<a href="#" onClick={()=>{window.location.href="Login"}}> Sign in </a> </p>
+                                <p  className="container-condition">Already Have an Account<a href="#" onClick={()=>{history.push({ pathname: '/user/Login'})}}> Sign in </a> </p>
                             </div>               
                     </form>
                 </div>

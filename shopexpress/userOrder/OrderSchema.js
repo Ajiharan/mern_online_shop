@@ -10,8 +10,7 @@ const OrderSchema=mongoose.Schema({
 
     cardlist :{
       type:Array,
-        required:true
-
+      required:true
     },
 
     total:{

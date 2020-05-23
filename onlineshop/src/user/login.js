@@ -3,10 +3,11 @@ import formik,{useFormik} from 'formik';
 import * as yup from 'yup';
 import axios from 'axios'
 import { toast } from 'react-toastify';
-import {Route,Redirect} from 'react-router-dom';
+import {Route,Redirect,useHistory} from 'react-router-dom';
 
 const Login = (props) => {
     let hasToken=JSON.parse(localStorage.getItem('auth'));
+    let history = useHistory();
     useEffect(()=>{
        
         let temail= document.querySelector("#email");
@@ -108,7 +109,8 @@ const Login = (props) => {
                                  <a href="#"> condition of use</a> and  <a href="#"> privacy Policy</a></p>
                              </div>
                              <div className="container-login">
-                                 <p  className="container-condition">Don't Have any Account<a href="#" onClick={()=>{window.location.href="Register"}}> creating an account </a> </p>
+                                 <p  className="container-condition">Don't Have any Account
+                                 <a href="#" onClick={()=>{history.push({ pathname: '/user/Register'})}}> creating an account </a> </p>
                              </div>               
                      </form>
                  </div>

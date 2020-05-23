@@ -143,7 +143,7 @@ const CartHome = (props) => {
                                     <button onClick={()=>{DeleteFromcart(e._id)}} className="btn btn-danger mt-4">Remove Item</button>
                                     
                                         <div className="form-group mt-4">
-                                            <input min="1" defaultValue={e.count} type="number" onChange={(event)=>{InfoChange(event,e._id)}} className="form-control"/>
+                                            <input min="1" value={e.count} type="number" onChange={(event)=>{InfoChange(event,e._id)}} className="form-control"/>
                                            
                                         </div>                                     
                                     
@@ -155,9 +155,7 @@ const CartHome = (props) => {
                 </div>
             </div>
             </Fragment>):(<h4 className="text-center bg-danger text-light" style={{opacity:'0.8'}}>No items are Added in list</h4>)
-            }
-
-            
+            }          
         </div>
 
     );
