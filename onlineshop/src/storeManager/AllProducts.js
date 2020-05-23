@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
 import EditProduct from "./EditProduct";
+import ViewProductFeedback from "./ViewProductFeedback";
 class AllProducts extends React.Component{
 
     constructor(props) {
         super(props);
         this.state={
             data : [],
-            pdata : []
+            pdata : [],
+            prodID :""
         }
     }
 
@@ -37,6 +39,15 @@ class AllProducts extends React.Component{
 
     }
 
+    View = (e) =>{
+        let pid = e._id;
+        axios.get(`http://localhost:3000/product/getProduct/${pid}`).then(res=> {
+            this.setState({
+                prodID : res.data._id
+            })
+        })
+    }
+
     render() {
         return (
             <div className="container mt-4" >
@@ -52,10 +63,14 @@ class AllProducts extends React.Component{
                                         <h5 className="card-title"> Price : ${e.price}</h5>
                                         <h5 className="card-title"> Count : {e.count}</h5>
                                         <button type="button" className="btn btn-primary" data-toggle="modal"
-                                                data-target="#exampleModalLong" onClick={()=> {
+                                                data-target="#exampleModalLong1" onClick={()=> {
                                                       this.Edit(e)
-                                        }}>
-                                        Edit</button>
+                                        }}>Edit</button>
+
+                                        <button type="button" className="btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModalLong2" onClick={()=> {
+                                            this.View(e)
+                                        }}>View</button>
                                     </div>
                                 </div>
 
@@ -72,6 +87,7 @@ class AllProducts extends React.Component{
 
                 </div>
             <EditProduct productData = {this.state.pdata}/>
+            <ViewProductFeedback pid = {this.state.prodID}/>
              </div>
         )
     }

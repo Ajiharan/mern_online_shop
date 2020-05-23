@@ -105,7 +105,7 @@ class ProductInfoForm extends React.Component {
                 <br/>
                 <img src={this.state.imageUrl || 'http://via.placeholder.com/200x200'} id="img-fire" alt="Uploaded images" height="150" width="150"/>
                 <br/>
-                <progress value={this.state.progress} max="100"/>
+                <progress  value={this.state.progress} max="100"/>
                 <br/>
                 <input type="file" id ="img" onChange={this.handleChange}/>
                 <button className="btn" onClick={this.handleUpload}>Upload</button>
@@ -146,7 +146,7 @@ class ProductInfoForm extends React.Component {
                                name = "count"
                                value = {this.state.count}/><br/>
 
-                        <button type="submit" className="btn">{this.state.isEdit ? 'Update' :'Add'}</button> <input type="button" className="btn" value="Clear" onClick={this.Clear}/>
+                        <button type="submit" className="btn">Add</button> <input type="button" className="btn" value="Clear" onClick={this.Clear}/>
 
                     </div>
                 </form>
