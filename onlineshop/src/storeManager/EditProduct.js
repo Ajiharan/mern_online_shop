@@ -15,7 +15,8 @@ class EditProduct extends React.Component{
             count: "",
             imageUrl:"",
             progress: 0,
-            Categorydata: []
+            Categorydata: [],
+            data:[]
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,6 +25,7 @@ class EditProduct extends React.Component{
 
     componentWillReceiveProps(props) {
         this.setState({
+            data : props.productData,
             _id:props.productData._id,
             name: props.productData.name,
             category: props.productData.category,
@@ -93,6 +95,8 @@ class EditProduct extends React.Component{
     }
 
     infoSubmit =event => {
+        event.preventDefault();
+
         let data = {
             _id : this.state._id,
             name: this.state.name,
@@ -105,7 +109,6 @@ class EditProduct extends React.Component{
         axios.put("http://localhost:3000/product/update",data).then(res=>{
             toast.success(`${data.name} is Updated sucessfully!!!`);
         })
-
     }
 
 

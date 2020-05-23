@@ -43,7 +43,7 @@ class ViewProductFeedback extends React.Component{
                                                         <div className="row mt-4 card"  id="reviewlist" key={i}>
                                                             <div className="col col-12">
                                                                 <span className="text-danger">User Id : {e.uid}</span>
-                                                                <h6 style={{marginTop:'8px'}} className="text-dark">Comment : {e.comment}</h6>
+                                                                <h6 style={{marginTop:'8px'}} className="text-dark">Comment : {e.comment === null ? 'No comment' : e.comment}</h6>
                                                                 <ReactStars
                                                                     count={5}
                                                                     size={28}
@@ -62,7 +62,7 @@ class ViewProductFeedback extends React.Component{
                                                 :
 
                                                 (
-                                                    <h6 style={{marginTop:'8px'}} className="text-dark">No comments yet</h6>
+                                                    <h6 style={{marginTop:'8px'}} className="text-dark">It's haven't been rated yet</h6>
                                                 )
                                         }
 
