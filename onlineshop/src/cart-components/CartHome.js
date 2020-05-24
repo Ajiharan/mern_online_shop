@@ -55,7 +55,7 @@ const CartHome = (props) => {
        axios.post('http://localhost:3000/order/add',{uid:cardlist[0].uid,cardlist:cardlist,total:totalPrice}).then(res=>{
         history.push({
             pathname: '/user/payment',
-            state: { uid:cardlist[0].uid,total:totalPrice,orderId:res.data._id } 
+            state: { oid:res.data._id,uid:cardlist[0].uid,total:totalPrice,orderId:res.data._id } 
         })
        }).catch(err=>{
            console.log(err);

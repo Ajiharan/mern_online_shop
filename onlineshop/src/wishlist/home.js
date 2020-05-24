@@ -26,6 +26,7 @@ const Home = (props) => {
     const Addcart=(e)=>{
         axios.post('http://localhost:3000/cart/add',{uid:props.sendData._id,pid:e._id}).then(res=>{
             // console.log(res.data);
+            props.UpdateData();
             toast.success("Added to cart Sucessfully");
         }).catch(err=>{
             // console.log(err);

@@ -19,7 +19,7 @@ const OrderSchema=mongoose.Schema({
     },
     status:{
         type:Boolean,
-        default:true
+        default:false
     }
 });
 

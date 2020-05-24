@@ -25,37 +25,11 @@ import ViewOrders from "./storeManager/ViewOrders";
 import UserRating from "./userReview/ReviewRating"
 import Wishlist from "./wishlist/home";
 import Payment from "./orders/Payment";
+import UserOrder from "./orders/OrderDetails";
 import axios from 'axios';
 
 export const UserUpdateContext=React.createContext();
 export const UserCartContext=React.createContext();
-
-// const PrivateRoute = ({Component,CartData,...rest}) => {
-  
-//   console.log(Component);
-//   let userhasToken=JSON.parse(localStorage.getItem('auth'));
-//   console.log("userToken",userhasToken);
-//   return (
-//     <Route
-//       {...rest}
-//       render={
-//           props=>{
-             
-//               return userhasToken !==null ?(<Component {...props}/>):(  <Redirect
-//                   to={{
-//                       pathname:'/user/Login'
-//                   }}
-//                   />)
-
-//           }
-//       }
-    
-    
-//     />
-//   );
-// };
-
-
 
 
 function App(props) {
@@ -123,10 +97,10 @@ function App(props) {
       <Route exact path="/user/Register" component={Register}/>
       <Route exact path="/user/Login" component={Login}/>
       <Route exact path="/user/cart" render={(props)=><CartHome {...props} UpdateData={UpdateCount} CartData={userData}/>} />  
-      <UserProtected exact path="/user/wishlist"  component={()=><Wishlist sendData={userData}/>}/>
+      <Route exact path="/user/wishlist"  render={(props)=><Wishlist {...props} UpdateData={UpdateCount} sendData={userData}/>}/>
       <UserProtected exact path="/user/payment" component={Payment}/>
       <UserProtected  exact path="/user/rating" component={UserRating}/> 
-     
+     <UserProtected exact path ="/order/myOrders" component={UserOrder}/>
      
       <UserUpdateContext.Provider value={UpdateUi} >
        <UserProtected  exact path="/user/dashboard" component={UserDashboard}/>    

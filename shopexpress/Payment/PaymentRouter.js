@@ -23,7 +23,7 @@ router.post("/add",async(req,res) =>{
     }).catch(err=>{
         res.status(400).json(err);
     })
-})
+});
 
 router.get("/view",async(req,res) =>{
     var findData = await PaymentInfo.find().limit(15);

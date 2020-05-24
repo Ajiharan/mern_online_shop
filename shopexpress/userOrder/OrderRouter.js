@@ -30,8 +30,18 @@ router.get('/get/:uid',async(req,res)=>{
         let resData=await OrderSchema.find({uid:req.params.uid});
         res.status(200).json(resData);
     }catch(err){
-        res.status(400).json(err)
+        res.status(400).json(err);
     }
 });
+
+router.put('/update/:id',async(req,res)=>{
+    try{
+        let UpdateData=await OrderSchema.updateOne({_id:req.params.id},{$set:{status:true}});
+        res.status(200).json(UpdateData);
+
+    }catch(err){
+        res.status(400).json(err);
+    }
+})
 
 module.exports=router;

@@ -12,27 +12,32 @@ const PaymentSchema=mongoose.Schema({
 
     cardOwner:{
         type:String,
-        required:true
+        default:null
+        
     },
 
     cardNumber:{
         type:String,
-        required:true
+        default:null
+       
     },
 
     expiryMonth:{
         type:Number,
-        required:true
+        default:null
+        
     },
 
     expiryYear:{
         type:Number,
-        required:true
+        default:null
+        
     },
 
     cvv :{
         type:Number,
-        required:true
+        default:null
+        
     }
 
 });
