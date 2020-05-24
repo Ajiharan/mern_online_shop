@@ -102,7 +102,8 @@ const Navbar = (props) => {
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="u_dropdown">
                         <Link className="dropdown-item" to="/user/Login"><i className="fas fa-sign-in-alt"></i> User login</Link>
                         <Link className="dropdown-item" to="/admin/Login"><i className="fas fa-sign-in-alt"></i> Admin login</Link>
-                
+                        <Link className="dropdown-item" to="/manager/Login"><i className="fas fa-sign-in-alt"></i> Store Manager login</Link>
+
                     </div>
                 </div>
             
