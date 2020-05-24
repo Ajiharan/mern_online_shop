@@ -95,7 +95,6 @@ class EditProduct extends React.Component{
     }
 
     infoSubmit =event => {
-        event.preventDefault();
 
         let data = {
             _id : this.state._id,
