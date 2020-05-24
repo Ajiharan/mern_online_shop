@@ -202,7 +202,7 @@ const ReviewRating = (props) => {
                                 halfIcon={<i className='fa fa-star-half-alt'></i>}
                                 fullIcon={<i className='fa fa-star'></i>}
                                 color2={'#ffd700'} /> 
-                            <form id="frm" onSubmit={UpdateComment}>
+                            <form id="frm" style={{marginBottom:'40px'}} onSubmit={UpdateComment}>
                                 <div className="form-group">
                                     <label htmlFor="txtComment">Comment</label>
                                     <textarea value={userComment} onChange={InfoChange} name="txtComment" placeholder="Add your Comment" rows={3} id="txtComment" className="form-control" required/>

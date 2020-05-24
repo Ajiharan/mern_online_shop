@@ -11,8 +11,8 @@ router.post('/sender',async(req,res)=>{
             service:"gmail",
           
             auth:{
-                user:'mydummy1243@gmail.com',
-                pass:'pass'
+                user:'mydemopro1111@gmail.com',
+                pass:'Demo0000tt%'
             }
         });
         
@@ -24,7 +24,7 @@ router.post('/sender',async(req,res)=>{
         switch(template){
             case "hello":
                 data={
-                    from: "Baskaran Ajiharan <mydummy1243@gmail.com>",
+                    from: "Baskaran Ajiharan <mydemopro1111@gmail.com>",
                     to:to,
                     subject:`Hello${name}`,
                     html:Hello(name)
@@ -32,7 +32,7 @@ router.post('/sender',async(req,res)=>{
                 break;
             case "thanks":
                 data={
-                    from: "Baskaran Ajiharan <mydummy1243@gmail.com>",
+                    from: "Baskaran Ajiharan <mydemopro1111@gmail.com>",
                     to:to,
                     subject:`Thanks${name}`,
                     html:Thanks(name)

@@ -25,6 +25,8 @@ const ReviewList = (props) => {
 
     return (
         <Fragment>
+           {
+                (reviewData.length > 0)?(
               <div className="rate-list-container mt-4">
                 <div className="store-list">     
                     {
@@ -56,7 +58,8 @@ const ReviewList = (props) => {
                         ))
                     }                   
                 </div>
-            </div>  
+            </div> 
+            ):(null)} 
         </Fragment>
     );
 };

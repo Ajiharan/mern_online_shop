@@ -31,7 +31,7 @@ class MailActivity extends React.Component {
             });
         
 
-        },100);
+        },300000);
     }
     componentWillUnmount(){
         console.log("componentWillUnmount()");
